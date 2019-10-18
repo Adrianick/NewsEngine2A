@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace NewsEngine2A.Controllers
 {
+    [RoutePrefix("Home")]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -13,9 +14,11 @@ namespace NewsEngine2A.Controllers
             return View();
         }
 
-        public ActionResult About()
+        [HttpGet]
+        [Route("About/{it:regex(^\\d{4}$)}/{id?}")]
+        public ActionResult About(int it, int? id)
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Your application description page."+it;
 
             return View();
         }
