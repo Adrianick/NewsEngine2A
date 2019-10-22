@@ -17,6 +17,36 @@ namespace NewsEngine2A.Controllers
 
             NewsEngineContext context = new NewsEngineContext();
 
+            
+            
+            if (!context.Roles.Any())
+            {
+                Role candidate = new Role
+                {
+                    Id = 1,
+                    Name = UserRoles.Unregistered,
+                };
+                context.Roles.Add(candidate);
+                Role company = new Role
+                {
+                    Id = 2,
+                    Name = UserRoles.Registered,
+                };
+                context.Roles.Add(company);
+                Role editor = new Role
+                {
+                    Id = 3,
+                    Name = UserRoles.Editor,
+                };
+                context.Roles.Add(editor);
+                Role admin = new Role
+                {
+                    Id = 4,
+                    Name = UserRoles.Admin,
+                };
+                context.Roles.Add(admin);
+                context.SaveChanges();
+            }
 
             if (!context.Users.Any())
             {
@@ -27,10 +57,20 @@ namespace NewsEngine2A.Controllers
                     Name = "Adrian",
                     Surname = "Nicolae",
                     Phone = "07716771693",
-                    Role = Helpers.UserHelper.UserRoles.Admin,
-                    Password = "0122100".EncryptUserPassword()
+                    Password = "0122100".EncryptUserPassword(),
                 };
                 context.Users.Add(newUser);
+
+                context.SaveChanges();
+
+                UserRole newRole = new UserRole
+                {
+                    UserId = newUser.Id,
+                    RoleId = 4
+                };
+                context.UserRoles.Add(newRole);
+                context.SaveChanges();
+
 
                 NewsCategory newNewsCategory = new NewsCategory()
                 {

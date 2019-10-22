@@ -29,6 +29,6 @@ namespace NewsEngine2A.Models.News
         [ForeignKey("NewsCategoryId")]
         public virtual NewsCategory NewsCategory { get; set; }
 
-        //public virtual Comment Comment { get; set; }
+        //public virtual List<Comment> Comments { get; set; }
     }
 }
