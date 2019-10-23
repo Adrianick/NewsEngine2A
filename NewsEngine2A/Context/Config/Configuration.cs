@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.Migrations;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace NewsEngine2A.Context.Config
 {
@@ -8,6 +9,7 @@ namespace NewsEngine2A.Context.Config
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
+
         }
 
         protected override void Seed(NewsEngineContext context)

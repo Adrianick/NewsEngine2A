@@ -12,16 +12,19 @@ namespace NewsEngine2A.Context
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+
         public DbSet<Article> Articles { get; set; }
         public DbSet<NewsCategory> NewsCategories { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<UserRole> UserRoles  { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
 
             //modelBuilder.Entity<Article>()
@@ -32,5 +35,7 @@ namespace NewsEngine2A.Context
             modelBuilder.Entity<NewsCategory>()
                 .ToTable("NewsCategories");
         }
+
+        public System.Data.Entity.DbSet<NewsEngine2A.Models.User.UserRegister> UserRegisters { get; set; }
     }
 }

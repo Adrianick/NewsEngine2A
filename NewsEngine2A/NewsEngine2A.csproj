@@ -134,15 +134,18 @@
     <Compile Include="Context\Config\Configuration.cs" />
     <Compile Include="Context\NewsEngineContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\UserHelper\Password.cs" />
     <Compile Include="Helpers\UserHelper\UserRoles.cs" />
     <Compile Include="Models\News\Article.cs" />
+    <Compile Include="Models\News\Comment.cs" />
     <Compile Include="Models\News\NewsCategory.cs" />
     <Compile Include="Models\User\Role.cs" />
     <Compile Include="Models\User\User.cs" />
+    <Compile Include="Models\User\UserRegister.cs" />
     <Compile Include="Models\User\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -182,6 +185,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

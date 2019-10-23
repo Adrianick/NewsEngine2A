@@ -17,8 +17,8 @@ namespace NewsEngine2A.Controllers
 
             NewsEngineContext context = new NewsEngineContext();
 
-            
-            
+
+
             if (!context.Roles.Any())
             {
                 Role candidate = new Role
@@ -92,6 +92,18 @@ namespace NewsEngine2A.Controllers
                 context.Articles.Add(newArticle);
 
                 context.SaveChanges();
+
+                Comment comment = new Comment
+                {
+                    Content = "Comentariu de adi",
+                    CreateDate = DateTime.Now,
+                    ArticleId = newArticle.Id,
+                    AuthorId = newUser.Id
+                };
+
+                context.Comments.Add(comment);
+
+                context.SaveChanges();
             }
 
             return View();
@@ -113,5 +125,6 @@ namespace NewsEngine2A.Controllers
 
             return View();
         }
+       
     }
 }
