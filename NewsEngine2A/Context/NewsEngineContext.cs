@@ -36,6 +36,8 @@ namespace NewsEngine2A.Context
                 .ToTable("NewsCategories");
         }
 
-        public System.Data.Entity.DbSet<NewsEngine2A.Models.User.UserRegister> UserRegisters { get; set; }
+        //public System.Data.Entity.DbSet<NewsEngine2A.Models.User.UserRegister> UserRegisters { get; set; }
+
+        //public System.Data.Entity.DbSet<NewsEngine2A.Models.User.UserLogin> UserLogins { get; set; }
     }
 }

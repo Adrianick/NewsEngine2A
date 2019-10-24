@@ -19,6 +19,27 @@ namespace NewsEngine2A.Controllers
 
 
 
+            //UserRegister newRegister = new UserRegister()
+            //{
+            //    Id = 1,
+            //    ConfirmPassword = "222333444f",
+            //    Password = "222333444f",
+            //    Email = "23421@21.234",
+            //    Phone = "1231231234",
+            //    Name = "gda",
+            //    Surname = "gdaT"
+            //};
+
+            //UserLogin nUserLogin = new UserLogin()
+            //{
+            //    Id = 1,
+            //    Email = "23421@21.234",
+            //    Password = "123123123f"
+            //};
+            //context.UserLogins.Add(nUserLogin);
+            //context.UserRegisters.Add(newRegister);
+            //context.SaveChanges();
+
             if (!context.Roles.Any())
             {
                 Role candidate = new Role
@@ -118,7 +139,7 @@ namespace NewsEngine2A.Controllers
             return View();
         }
 
-
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
