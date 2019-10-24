@@ -2,17 +2,20 @@
 using NewsEngine2A.Helpers.UserHelper;
 using NewsEngine2A.Models.User;
 using System;
+using System.Linq;
+using System.Net.Mail;
 using System.Web.Mvc;
 
 namespace NewsEngine2A.Controllers
 {
+    [RoutePrefix("user")]
     public class UserController : Controller
     {
         // GET: User
 
+        [Route("register/{id?}")]
         public ActionResult Register(int id = 0)
         {
-            ViewBag.Message = "Your REGISTERERERERERERERERER page." + id;
 
             UserRegister newUser = new UserRegister();
 
@@ -21,13 +24,25 @@ namespace NewsEngine2A.Controllers
         }
 
         [HttpPost]
+        [Route("register")]
         public ActionResult Register(UserRegister user)
         {
             NewsEngineContext context = new NewsEngineContext();
 
+            if (!IsValidEmail(user.Email))
+            {
+                ViewBag.EmailExists = "Invalid email address!";
+                return View("Register");
+            }
+
+            if (context.Users.Any(u => u.Email.Equals(user.Email)))
+            {
+                ViewBag.EmailExists = "Email already exists!";
+                return View("Register");
+            }
+
             User newUser = new User()
             {
-                Id = 11,
                 Name = user.Name,
                 Surname = user.Surname,
                 Email = user.Email,
@@ -43,11 +58,24 @@ namespace NewsEngine2A.Controllers
             {
 
             }
+            ModelState.Clear();
 
-            return View("Register/" + newUser.Id);
+            return View("Register");
         }
 
+        public bool IsValidEmail(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
 
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
     }
 
 }
