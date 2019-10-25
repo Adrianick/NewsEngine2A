@@ -4,53 +4,41 @@ using NewsEngine2A.Models.News;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using NewsEngine2A.Identity;
 
 namespace NewsEngine2A.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<int, AppUserLogin, AppUserRole, AppUserClaim>, IUser<int>
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(AppUserManager manager,
+            string authenticationType)
         {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
+            ClaimsIdentity userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+            userIdentity.AddClaim(new Claim("UserId", this.Id.ToString()));
             return userIdentity;
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class AppUserLogin : IdentityUserLogin<int> { }
+
+    public class AppUserRole : IdentityUserRole<int> { }
+
+    public class AppUserClaim : IdentityUserClaim<int> { }
+
+    public class AppRole : IdentityRole<int, AppUserRole> { }
+
+    public class AppClaimsPrincipal : ClaimsPrincipal
     {
+        public AppClaimsPrincipal(ClaimsPrincipal principal) : base(principal)
+        { }
 
-        public DbSet<Article> Articles { get; set; }
-        public DbSet<NewsCategory> NewsCategories { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-
-        public ApplicationDbContext()
-            : base("UsersDbContext", throwIfV1Schema: false)
+        public int UserId
         {
-
-        }
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-        //    modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
-
-        //    //modelBuilder.Entity<Article>()
-        //    //    .HasMany(u => u.Comments)
-        //    //    .WithRequired(u => u.ArticleId)
-        //    //    .WillCascadeOnDelete(true);
-
-        //    modelBuilder.Entity<NewsCategory>()
-        //        .ToTable("NewsCategories");
-        //}
-
-        public static ApplicationDbContext Create()
-        {
-
-            return new ApplicationDbContext();
+            get { return int.Parse(this.FindFirst(ClaimTypes.Sid).Value); }
         }
     }
+
 }
