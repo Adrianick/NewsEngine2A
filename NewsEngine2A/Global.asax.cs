@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
@@ -15,7 +14,7 @@ namespace NewsEngine2A
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<NewsEngine2A.Context.NewsEngineContext, NewsEngine2A.Context.Config.Configuration>());
+            //System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<NewsEngine2A.Context.NewsEngineContext, NewsEngine2A.Context.Config.Configuration>());
 
         }
     }

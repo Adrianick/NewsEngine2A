@@ -22,10 +22,10 @@ namespace NewsEngine2A.Models.News
 
         public int NewsCategoryId { get; set; }
 
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
         [ForeignKey("AuthorId")]
-        public virtual User.User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [ForeignKey("NewsCategoryId")]
         public virtual NewsCategory NewsCategory { get; set; }

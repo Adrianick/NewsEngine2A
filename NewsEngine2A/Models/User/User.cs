@@ -1,7 +1,9 @@
-﻿using NewsEngine2A.Models.News;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using NewsEngine2A.Models.News;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNet.Identity;
 
 namespace NewsEngine2A.Models.User
 {
@@ -46,4 +48,5 @@ namespace NewsEngine2A.Models.User
         public string Email { get; set; }
         public string Password { get; set; }
     }
+    
 }
