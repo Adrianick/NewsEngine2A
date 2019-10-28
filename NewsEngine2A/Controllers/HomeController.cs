@@ -9,7 +9,7 @@ namespace NewsEngine2A.Controllers
     public class HomeController : Controller
     {
 
-        
+        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -17,7 +17,7 @@ namespace NewsEngine2A.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = User.Identity.GetUserId();
 
             return View();
         }

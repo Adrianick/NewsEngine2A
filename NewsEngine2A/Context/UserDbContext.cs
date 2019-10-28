@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace NewsEngine2A.Context
 {
-    public class UsersDbContext : IdentityDbContext<ApplicationUser, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>
+    public class UsersDbContext : IdentityDbContext<ApplicationUser>//, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>
     {
         public UsersDbContext() : base("name=UsersDbContext")
         {
@@ -23,10 +23,10 @@ namespace NewsEngine2A.Context
 
             modelBuilder.Entity<ApplicationUser>().ToTable("Users").Property(p => p.Id);
 
-            modelBuilder.Entity<AppUserRole>().ToTable("UserRoles");
-            modelBuilder.Entity<AppUserLogin>().ToTable("UserLogins");
-            modelBuilder.Entity<AppUserClaim>().ToTable("UserClaims");
-            modelBuilder.Entity<AppRole>().ToTable("Roles");
+        //    modelBuilder.Entity<AppUserRole>().ToTable("UserRoles");
+        //    modelBuilder.Entity<AppUserLogin>().ToTable("UserLogins");
+        //    modelBuilder.Entity<AppUserClaim>().ToTable("UserClaims");
+        //    modelBuilder.Entity<AppRole>().ToTable("Roles");
         }
     }
 }
