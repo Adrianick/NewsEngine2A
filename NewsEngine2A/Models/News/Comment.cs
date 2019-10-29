@@ -14,7 +14,7 @@ namespace NewsEngine2A.Models.News
         public int ArticleId { get; set; }
 
         [ForeignKey("AuthorId")]
-        public virtual ApplicationUser User { get; set; }
+        public virtual User.User User { get; set; }
 
         [ForeignKey("ArticleId")]
         public virtual Article Article { get; set; }

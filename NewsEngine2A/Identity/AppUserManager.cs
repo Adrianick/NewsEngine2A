@@ -14,7 +14,7 @@ namespace NewsEngine2A.Identity
 
         public static AppUserManager Create(IdentityFactoryOptions<AppUserManager> options, IOwinContext context)
         {
-            AppUserManager manager = new AppUserManager(new AppUserStore(context.Get<UsersDbContext>()));
+            AppUserManager manager = new AppUserManager(new AppUserStore(context.Get<NewsEngineContext>()));
 
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser, string>(manager)

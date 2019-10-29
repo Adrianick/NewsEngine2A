@@ -13,12 +13,12 @@ namespace NewsEngine2A.Identity
     public class AppUserStore : UserStore<ApplicationUser>,//, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>,
         IAppUserStore
     {
-        public AppUserStore() : base(new UsersDbContext())
+        public AppUserStore() : base(new NewsEngineContext())
         {
 
         }
 
-        public AppUserStore(UsersDbContext context) : base(context)
+        public AppUserStore(NewsEngineContext context) : base(context)
         {
 
         }

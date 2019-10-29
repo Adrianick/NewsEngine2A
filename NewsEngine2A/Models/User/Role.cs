@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace NewsEngine2A.Models.User
 {
-    public class Role
+    public class Role : IdentityRole
     {
         public int Id { get; set; }
         [MaxLength(512)]

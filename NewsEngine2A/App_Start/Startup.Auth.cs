@@ -15,7 +15,7 @@ namespace NewsEngine2A
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.CreatePerOwinContext(UsersDbContext.Create);
+            app.CreatePerOwinContext(NewsEngineContext.Create);
             app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
