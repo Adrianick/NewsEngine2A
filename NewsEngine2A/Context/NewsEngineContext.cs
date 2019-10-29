@@ -6,7 +6,7 @@ using NewsEngine2A.Models.User;
 
 namespace NewsEngine2A.Context
 {
-    public class NewsEngineContext : IdentityDbContext<IdentityUser,IdentityRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
+    public class NewsEngineContext : IdentityDbContext<User,Role, int, AppUserLogin, UserRole, AppUserClaim>
     {
         public NewsEngineContext() : base("name=NewsEngineContext")
         {
@@ -28,10 +28,10 @@ namespace NewsEngine2A.Context
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
-            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
-            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id).ToTable("Roles");
-            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId }).ToTable("UserRoles");
-            modelBuilder.Entity<IdentityUser>().ToTable("Users");
+            modelBuilder.Entity<AppUserLogin>().HasKey<int>(l => l.UserId);
+            //modelBuilder.Entity<Role>().HasKey<int>(r => r.Id).ToTable("Roles");
+            //modelBuilder.Entity<UserRole>().HasKey(r => new { r.RoleId, r.UserId }).ToTable("UserRoles");
+            //modelBuilder.Entity<User>().ToTable("Users");
 
             //modelBuilder.Entity<Article>()
             //    .HasMany(u => u.Comments)

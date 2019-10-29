@@ -10,7 +10,7 @@ namespace NewsEngine2A.Models.News
         public string Content { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? EditDate { get; set; }
-        public string AuthorId { get; set; }
+        public int AuthorId { get; set; }
         public int ArticleId { get; set; }
 
         [ForeignKey("AuthorId")]

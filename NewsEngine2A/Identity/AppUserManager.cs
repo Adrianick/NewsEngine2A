@@ -4,10 +4,11 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.DataProtection;
 using NewsEngine2A.Context;
 using NewsEngine2A.Models;
+using NewsEngine2A.Models.User;
 
 namespace NewsEngine2A.Identity
 {
-    public class AppUserManager : UserManager<ApplicationUser, string>
+    public class AppUserManager : UserManager<User, int>
     {
         public AppUserManager(IAppUserStore store) : base(store)
         { }
@@ -17,7 +18,7 @@ namespace NewsEngine2A.Identity
             AppUserManager manager = new AppUserManager(new AppUserStore(context.Get<NewsEngineContext>()));
 
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<ApplicationUser, string>(manager)
+            manager.UserValidator = new UserValidator<User, int>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true,
@@ -35,7 +36,7 @@ namespace NewsEngine2A.Identity
 
             IDataProtectionProvider dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, string>(dataProtectionProvider.Create("Security Token Provider"));
+                manager.UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("Security Token Provider"));
 
             return manager;
         }

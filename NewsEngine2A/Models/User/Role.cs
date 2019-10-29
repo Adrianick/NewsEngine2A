@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace NewsEngine2A.Models.User
 {
-    public class Role : IdentityRole
+    public class Role : IdentityRole<int, UserRole>
     {
         public int Id { get; set; }
         [MaxLength(512)]

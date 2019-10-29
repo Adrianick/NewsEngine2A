@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using NewsEngine2A.Identity;
+using NewsEngine2A.Models.User;
 
 namespace NewsEngine2A.Controllers
 {
@@ -151,7 +152,8 @@ namespace NewsEngine2A.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new User { UserName = model.Email, Email = model.Email, Name = model.Name, Surname = model.Surname, PhoneNumber = model.Phone};
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

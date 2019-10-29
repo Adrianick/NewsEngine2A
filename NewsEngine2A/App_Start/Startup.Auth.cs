@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using NewsEngine2A.Context;
 using NewsEngine2A.Identity;
 using NewsEngine2A.Models;
+using NewsEngine2A.Models.User;
 using Owin;
 
 namespace NewsEngine2A
@@ -32,9 +33,10 @@ namespace NewsEngine2A
                 {
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<AppUserManager, ApplicationUser>(
-                        validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<AppUserManager, User, int>(
+                        validateInterval: TimeSpan.FromSeconds(15),
+                        regenerateIdentityCallback: (manager, user) => user.GenerateUserIdentityAsync(manager),
+                        getUserIdCallback: (id) => id.GetUserId<int>())
                 }
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

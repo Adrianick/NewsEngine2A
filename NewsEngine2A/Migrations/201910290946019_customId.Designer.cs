@@ -7,13 +7,13 @@ namespace NewsEngine2A.Context.Config
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0-preview1-19506-01")]
-    public sealed partial class initial : IMigrationMetadata
+    public sealed partial class customId : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(customId));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910290848237_initial"; }
+            get { return "201910290946019_customId"; }
         }
         
         string IMigrationMetadata.Source
