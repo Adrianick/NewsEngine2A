@@ -192,18 +192,49 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\classy-nav.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\magnific-popup.css" />
+    <Content Include="Content\nice-select.css" />
+    <Content Include="Content\owl.carousel.min.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\themify-icons.css" />
     <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\active.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Content Include="Content\backtotop.scss" />
+    <Content Include="Content\blog.scss" />
+    <Content Include="Content\_color.scss" />
+    <Content Include="Content\_flex.scss" />
+    <Content Include="Content\_fonts.scss" />
+    <Content Include="Content\_miscellaneous.scss" />
+    <Content Include="Content\_responsive.scss" />
+    <Content Include="Content\_variables.scss" />
+    <Content Include="Content\breadcrumb.scss" />
+    <Content Include="Content\buttons.scss" />
+    <Content Include="Content\contact.scss" />
+    <Content Include="Content\footer.scss" />
+    <Content Include="Content\header.scss" />
+    <Content Include="Content\heading.scss" />
+    <Content Include="Content\hero.scss" />
+    <Content Include="Content\preloader.scss" />
+    <Content Include="Content\reboot.scss" />
+    <Content Include="Content\spacing.scss" />
+    <Content Include="Content\style.scss" />
+    <Content Include="Content\widget.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -214,13 +245,15 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\plugins.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\IndexOriginal.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
@@ -244,6 +277,7 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Web.config" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
