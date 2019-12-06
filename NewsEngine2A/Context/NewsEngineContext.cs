@@ -1,18 +1,20 @@
-﻿using NewsEngine2A.Models.News;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using NewsEngine2A.Models.News;
+using NewsEngine2A.Models.User;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Microsoft.AspNet.Identity.EntityFramework;
-using NewsEngine2A.Models.User;
 
 namespace NewsEngine2A.Context
 {
-    public class NewsEngineContext : IdentityDbContext<User,Role, int, AppUserLogin, UserRole, AppUserClaim>
+    public class NewsEngineContext : IdentityDbContext<User, Role, int, AppUserLogin, UserRole, AppUserClaim>
     {
         public NewsEngineContext() : base("name=NewsEngineContext")
         {
         }
+
         //public DbSet<User> Users { get; set; }
-        //public DbSet<UserRole> UserRoles { get; set; }
+
+        public DbSet<UserRole> UserRoles { get; set; }
         //public DbSet<Role> Roles { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<NewsCategory> NewsCategories { get; set; }
@@ -40,6 +42,12 @@ namespace NewsEngine2A.Context
 
             modelBuilder.Entity<NewsCategory>()
                 .ToTable("NewsCategories");
+
+            modelBuilder.Entity<UserRole>()
+                .ToTable("UserRoles");
+
+            modelBuilder.Entity<Role>()
+                .ToTable("Roles");
         }
 
         //public System.Data.Entity.DbSet<NewsEngine2A.Models.User.UserRegister> UserRegisters { get; set; }

@@ -27,7 +27,8 @@ namespace NewsEngine2A.Controllers
 
             return View();
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
+        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = User.Identity.GetUserId();
@@ -75,30 +76,32 @@ namespace NewsEngine2A.Controllers
                 {
                     UserRole newRole = new UserRole
                     {
-                        UserId = 3,
+                        //User = context.Users.FirstOrDefault(),
+                        //Role = context.Roles.FirstOrDefault(r => r.Name.ToLower().Equals("admin"))
+                        UserId = 1,
                         RoleId = 4
                     };
 
-                    User newUser = new User()
-                    {
-                        Email = "adrian.danut.nicolae@gmail.com",
-                        Name = "Adrian",
-                        Surname = "Nicolae",
-                        PhoneNumber = "07716771693",
-                        PasswordHash = "0122100",
-                        Roles = { newRole }
-                    };
-                    context.Users.Add(newUser);
+                    //User newUser = new User()
+                    //{
+                    //    Email = "adrian.danut.nicolae@gmail.com",
+                    //    Name = "Adrian",
+                    //    Surname = "Nicolae",
+                    //    PhoneNumber = "07716771693",
+                    //    PasswordHash = "0122100",
+                    //    Roles = { newRole }
+                    //};
+                    //context.Users.Add(newUser);
 
-                    context.SaveChanges();
+                    //context.SaveChanges();
 
                     //UserRole newRole = new UserRole
                     //{
                     //    UserId = newUser.Id,
                     //    RoleId = 4
                     //};
-                    //context.
-                    //context.SaveChanges();
+
+                    context.SaveChanges();
 
 
                     NewsCategory newNewsCategory = new NewsCategory()
@@ -120,6 +123,79 @@ namespace NewsEngine2A.Controllers
                     };
                     context.Articles.Add(newArticle);
 
+                    newArticle = new Article()
+                    {
+                        Title = "Titluuu2",
+                        Headline = "Un articol smek",
+                        Content = "Acest articol vb despre cat de smek e ssa fii smekk",
+                        CreateDate = DateTime.Now.AddMinutes(2),
+                        NewsCategoryId = context.NewsCategories.FirstOrDefault().Id,
+                        AuthorId = context.Users.FirstOrDefault().Id
+                    };
+                    context.Articles.Add(newArticle);
+
+                    newArticle = new Article()
+                    {
+                        Title = "Titluuu3",
+                        Headline = "Un articol smek",
+                        Content = "Acest articol vb despre cat de smek e ssa fii smekk",
+                        CreateDate = DateTime.Now.AddMinutes(2),
+                        NewsCategoryId = context.NewsCategories.FirstOrDefault().Id,
+                        AuthorId = context.Users.FirstOrDefault().Id
+                    };
+                    context.Articles.Add(newArticle);
+                    newArticle = new Article()
+                    {
+                        Title = "Titluuu4",
+                        Headline = "Un articol smek",
+                        Content = "Acest articol vb despre cat de smek e ssa fii smekk",
+                        CreateDate = DateTime.Now.AddMinutes(2),
+                        NewsCategoryId = context.NewsCategories.FirstOrDefault().Id,
+                        AuthorId = context.Users.FirstOrDefault().Id
+                    };
+                    context.Articles.Add(newArticle);
+                    newArticle = new Article()
+                    {
+                        Title = "Titluuu5",
+                        Headline = "Un articol smek",
+                        Content = "Acest articol vb despre cat de smek e ssa fii smekk",
+                        CreateDate = DateTime.Now.AddMinutes(2),
+                        NewsCategoryId = context.NewsCategories.FirstOrDefault().Id,
+                        AuthorId = context.Users.FirstOrDefault().Id
+                    };
+                    context.Articles.Add(newArticle);
+                    newArticle = new Article()
+                    {
+                        Title = "Titluuu6",
+                        Headline = "Un articol smek",
+                        Content = "Acest articol vb despre cat de smek e ssa fii smekk",
+                        CreateDate = DateTime.Now.AddMinutes(2),
+                        NewsCategoryId = context.NewsCategories.FirstOrDefault().Id,
+                        AuthorId = context.Users.FirstOrDefault().Id
+                    };
+                    context.Articles.Add(newArticle);
+                    newArticle = new Article()
+                    {
+                        Title = "Titluuu7",
+                        Headline = "Un articol smek",
+                        Content = "Acest articol vb despre cat de smek e ssa fii smekk",
+                        CreateDate = DateTime.Now.AddMinutes(2),
+                        NewsCategoryId = context.NewsCategories.FirstOrDefault().Id,
+                        AuthorId = context.Users.FirstOrDefault().Id
+                    };
+                    context.Articles.Add(newArticle);
+                    newArticle = new Article()
+                    {
+                        Title = "Titluuu8",
+                        Headline = "Un articol smek",
+                        Content = "Acest articol vb despre cat de smek e ssa fii smekk",
+                        CreateDate = DateTime.Now.AddMinutes(2),
+                        NewsCategoryId = context.NewsCategories.FirstOrDefault().Id,
+                        AuthorId = context.Users.FirstOrDefault().Id
+                    };
+                    context.Articles.Add(newArticle);
+
+
                     context.SaveChanges();
 
                     Comment comment = new Comment
@@ -127,7 +203,7 @@ namespace NewsEngine2A.Controllers
                         Content = "Comentariu de adi",
                         CreateDate = DateTime.Now,
                         ArticleId = newArticle.Id,
-                        AuthorId = newUser.Id
+                        AuthorId = 1
                     };
 
                     context.Comments.Add(comment);

@@ -7,13 +7,13 @@ namespace NewsEngine2A.Context.Config
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0-preview1-19506-01")]
-    public sealed partial class UserOverride : IMigrationMetadata
+    public sealed partial class i3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UserOverride));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(i3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910291031027_UserOverride"; }
+            get { return "201912061658193_i3"; }
         }
         
         string IMigrationMetadata.Source

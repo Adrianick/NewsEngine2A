@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using NewsEngine2A.Context;
+using NewsEngine2A.Identity;
 using NewsEngine2A.Models;
+using NewsEngine2A.Models.User;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using NewsEngine2A.Identity;
-using NewsEngine2A.Models.User;
 
 namespace NewsEngine2A.Controllers
 {
@@ -58,6 +59,22 @@ namespace NewsEngine2A.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task SetRole(int userId = 1, string roleName = "User")
+        {
+
+            //await _userManager.AddToRoleAsync(1, "Admin");\
+            var context = new NewsEngineContext();
+            var rol = new UserRole
+            {
+                UserId = 1,
+                RoleId = 4
+            };
+            context.UserRoles.Add(rol);
+            context.SaveChanges();
         }
 
         //
@@ -152,18 +169,12 @@ namespace NewsEngine2A.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email, Name = model.Name, Surname = model.Surname, PhoneNumber = model.Phone};
-                
+                var user = new User { UserName = model.Email, Email = model.Email, Name = model.Name, Surname = model.Surname, PhoneNumber = model.Phone };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -174,107 +185,7 @@ namespace NewsEngine2A.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
-        //[AllowAnonymous]
-        //public async Task<ActionResult> ConfirmEmail(int userId, string code)
-        //{
-        //    if (userId == null || code == null)
-        //    {
-        //        return View("Error");
-        //    }
-        //    var result = await UserManager.ConfirmEmailAsync(userId, code);
-        //    return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        //}
 
-        //
-        // GET: /Account/ForgotPassword
-        [AllowAnonymous]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/ForgotPassword
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await UserManager.FindByNameAsync(model.Email);
-        //        if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-        //        {
-        //            // Don't reveal that the user does not exist or is not confirmed
-        //            return View("ForgotPasswordConfirmation");
-        //        }
-
-        //        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-        //        // Send an email with this link
-        //        // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-        //        // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-        //        // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-        //        // return RedirectToAction("ForgotPasswordConfirmation", "Account");
-        //    }
-
-        //    // If we got this far, something failed, redisplay form
-        //    return View(model);
-        //}
-
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Account/ResetPassword
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
-        {
-            return code == null ? View("Error") : View();
-        }
-
-        //
-        // POST: /Account/ResetPassword
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-        //    var user = await UserManager.FindByNameAsync(model.Email);
-        //    if (user == null)
-        //    {
-        //        // Don't reveal that the user does not exist
-        //        return RedirectToAction("ResetPasswordConfirmation", "Account");
-        //    }
-        //    var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-        //    if (result.Succeeded)
-        //    {
-        //        return RedirectToAction("ResetPasswordConfirmation", "Account");
-        //    }
-        //    AddErrors(result);
-        //    return View();
-        //}
-
-        //
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -349,13 +260,11 @@ namespace NewsEngine2A.Controllers
             }
         }
 
-        
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+
+        [HttpGet]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Logout()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");

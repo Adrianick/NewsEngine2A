@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class customId : DbMigration
+    public partial class i : DbMigration
     {
         public override void Up()
         {
@@ -52,12 +52,10 @@
                         Name = c.String(nullable: false),
                         Surname = c.String(nullable: false),
                         Email = c.String(nullable: false, maxLength: 450),
-                        Phone = c.String(nullable: false, maxLength: 20),
-                        Password = c.String(nullable: false),
+                        PhoneNumber = c.String(nullable: false, maxLength: 20),
+                        PasswordHash = c.String(nullable: false),
                         EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
                         SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
                         PhoneNumberConfirmed = c.Boolean(nullable: false),
                         TwoFactorEnabled = c.Boolean(nullable: false),
                         LockoutEndDateUtc = c.DateTime(),
@@ -67,7 +65,7 @@
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Email, unique: true)
-                .Index(t => t.Phone, unique: true);
+                .Index(t => t.PhoneNumber, unique: true, name: "IX_Phone");
             
             CreateTable(
                 "dbo.AppUserClaims",
@@ -145,7 +143,7 @@
             DropIndex("dbo.UserRoles", new[] { "UserId" });
             DropIndex("dbo.AppUserLogins", new[] { "User_Id" });
             DropIndex("dbo.AppUserClaims", new[] { "UserId" });
-            DropIndex("dbo.Users", new[] { "Phone" });
+            DropIndex("dbo.Users", "IX_Phone");
             DropIndex("dbo.Users", new[] { "Email" });
             DropIndex("dbo.Comments", new[] { "ArticleId" });
             DropIndex("dbo.Comments", new[] { "AuthorId" });
