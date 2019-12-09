@@ -15,17 +15,12 @@ namespace NewsEngine2A.Controllers
 {
     public class HomeController : Controller
     {
-
+        private readonly NewsEngineContext _context = new NewsEngineContext();
         public ActionResult Index()
         {
-            //NewsEngineContext context = new NewsEngineContext();
+            var articles = _context.Articles.ToList();
 
-            //var eu = context.Users.Where(x => x.Id == 3).FirstOrDefault();
-            //eu.UserName = "adrian.danut.nicolae@gmail.com";
-            //context.Entry(eu).State = EntityState.Modified;
-            //context.SaveChanges();
-
-            return View();
+            return View(articles);
         }
         //[Authorize(Roles = "Admin")]
         [Authorize]

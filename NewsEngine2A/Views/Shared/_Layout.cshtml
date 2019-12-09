@@ -1,13 +1,10 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
-    <link rel="stylesheet" href="..\..\Content\style.css">
+    <title></title>
 </head>
 <body>
     <!--<div class="navbar navbar-inverse navbar-fixed-top">
@@ -31,6 +28,7 @@
         </div>
     </div>
     -->
+    <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <!-- Top Header Area -->
         <div class="top-header-area">
@@ -75,6 +73,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Navbar Area -->
         <div class="vizew-main-menu" id="sticker">
             <div class="classy-nav-container breakpoint-off">
                 <div class="container">
@@ -102,7 +102,7 @@
                                 <ul>
                                     <li class="active"><a href="index.html">Home</a></li>
                                     <li><a href="archive-list.html">Archives</a></li>
-                                    <li class="cn-dropdown-item has-down">
+                                    <li>
                                         <a href="#">Pages</a>
                                         <ul class="dropdown">
                                             <li><a href="index.html">- Home</a></li>
@@ -117,6 +117,48 @@
                                     </li>
                                     <li>
                                         <a href="#">Features</a>
+                                        <div class="megamenu">
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="index.html">- Home</a></li>
+                                                <li><a href="archive-list.html">- Archive List</a></li>
+                                                <li><a href="archive-grid.html">- Archive Grid</a></li>
+                                                <li><a href="single-post.html">- Single Post</a></li>
+                                                <li><a href="video-post.html">- Single Video Post</a></li>
+                                                <li><a href="contact.html">- Contact</a></li>
+                                                <li><a href="typography.html">- Typography</a></li>
+                                                <li><a href="login.html">- Login</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="index.html">- Home</a></li>
+                                                <li><a href="archive-list.html">- Archive List</a></li>
+                                                <li><a href="archive-grid.html">- Archive Grid</a></li>
+                                                <li><a href="single-post.html">- Single Post</a></li>
+                                                <li><a href="video-post.html">- Single Video Post</a></li>
+                                                <li><a href="contact.html">- Contact</a></li>
+                                                <li><a href="typography.html">- Typography</a></li>
+                                                <li><a href="login.html">- Login</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="index.html">- Home</a></li>
+                                                <li><a href="archive-list.html">- Archive List</a></li>
+                                                <li><a href="archive-grid.html">- Archive Grid</a></li>
+                                                <li><a href="single-post.html">- Single Post</a></li>
+                                                <li><a href="video-post.html">- Single Video Post</a></li>
+                                                <li><a href="contact.html">- Contact</a></li>
+                                                <li><a href="typography.html">- Typography</a></li>
+                                                <li><a href="login.html">- Login</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="index.html">- Home</a></li>
+                                                <li><a href="archive-list.html">- Archive List</a></li>
+                                                <li><a href="archive-grid.html">- Archive Grid</a></li>
+                                                <li><a href="single-post.html">- Single Post</a></li>
+                                                <li><a href="video-post.html">- Single Video Post</a></li>
+                                                <li><a href="contact.html">- Contact</a></li>
+                                                <li><a href="typography.html">- Typography</a></li>
+                                                <li><a href="login.html">- Login</a></li>
+                                            </ul>
+                                        </div>
                                     </li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
@@ -128,17 +170,7 @@
             </div>
         </div>
     </header>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!-- ##### Header Area End ##### -->
+    @RenderBody()
 </body>
 </html>

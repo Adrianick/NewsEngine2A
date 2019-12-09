@@ -3,30 +3,12 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class i : DbMigration
+    public partial class updateDb : DbMigration
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.Articles",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(),
-                        Headline = c.String(),
-                        Content = c.String(),
-                        CreateDate = c.DateTime(nullable: false),
-                        EditDate = c.DateTime(),
-                        PictureUrl = c.String(),
-                        NewsCategoryId = c.Int(nullable: false),
-                        AuthorId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.AuthorId)
-                .ForeignKey("dbo.NewsCategories", t => t.NewsCategoryId)
-                .Index(t => t.NewsCategoryId)
-                .Index(t => t.AuthorId);
-            
+            DropForeignKey("dbo.Articles", "NewsCategoryId", "dbo.NewsCategories");
+            DropForeignKey("dbo.Articles", "AuthorId", "dbo.Users");
             CreateTable(
                 "dbo.Comments",
                 c => new
@@ -43,29 +25,6 @@
                 .ForeignKey("dbo.Users", t => t.AuthorId)
                 .Index(t => t.AuthorId)
                 .Index(t => t.ArticleId);
-            
-            CreateTable(
-                "dbo.Users",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false),
-                        Surname = c.String(nullable: false),
-                        Email = c.String(nullable: false, maxLength: 450),
-                        PhoneNumber = c.String(nullable: false, maxLength: 20),
-                        PasswordHash = c.String(nullable: false),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        SecurityStamp = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Email, unique: true)
-                .Index(t => t.PhoneNumber, unique: true, name: "IX_Phone");
             
             CreateTable(
                 "dbo.AppUserClaims",
@@ -116,27 +75,42 @@
                     })
                 .PrimaryKey(t => t.Id);
             
-            CreateTable(
-                "dbo.NewsCategories",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(maxLength: 450),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true);
-            
+            AddColumn("dbo.Users", "PhoneNumber", c => c.String(nullable: false, maxLength: 20));
+            AddColumn("dbo.Users", "PasswordHash", c => c.String(nullable: false));
+            AddColumn("dbo.Users", "EmailConfirmed", c => c.Boolean(nullable: false));
+            AddColumn("dbo.Users", "SecurityStamp", c => c.String());
+            AddColumn("dbo.Users", "PhoneNumberConfirmed", c => c.Boolean(nullable: false));
+            AddColumn("dbo.Users", "TwoFactorEnabled", c => c.Boolean(nullable: false));
+            AddColumn("dbo.Users", "LockoutEndDateUtc", c => c.DateTime());
+            AddColumn("dbo.Users", "LockoutEnabled", c => c.Boolean(nullable: false));
+            AddColumn("dbo.Users", "AccessFailedCount", c => c.Int(nullable: false));
+            AddColumn("dbo.Users", "UserName", c => c.String());
+            AlterColumn("dbo.NewsCategories", "Name", c => c.String(maxLength: 450));
+            AlterColumn("dbo.Users", "Name", c => c.String(nullable: false));
+            AlterColumn("dbo.Users", "Surname", c => c.String(nullable: false));
+            AlterColumn("dbo.Users", "Email", c => c.String(nullable: false, maxLength: 450));
+            CreateIndex("dbo.Users", "Email", unique: true);
+            CreateIndex("dbo.Users", "PhoneNumber", unique: true, name: "IX_Phone");
+            CreateIndex("dbo.NewsCategories", "Name", unique: true);
+            AddForeignKey("dbo.Articles", "NewsCategoryId", "dbo.NewsCategories", "Id");
+            AddForeignKey("dbo.Articles", "AuthorId", "dbo.Users", "Id");
+            DropColumn("dbo.Users", "Phone");
+            DropColumn("dbo.Users", "Password");
+            DropColumn("dbo.Users", "Role");
         }
         
         public override void Down()
         {
+            AddColumn("dbo.Users", "Role", c => c.String());
+            AddColumn("dbo.Users", "Password", c => c.String());
+            AddColumn("dbo.Users", "Phone", c => c.String());
+            DropForeignKey("dbo.Articles", "AuthorId", "dbo.Users");
             DropForeignKey("dbo.Articles", "NewsCategoryId", "dbo.NewsCategories");
             DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserRoles", "RoleId", "dbo.Roles");
             DropForeignKey("dbo.AppUserLogins", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Comments", "AuthorId", "dbo.Users");
             DropForeignKey("dbo.AppUserClaims", "UserId", "dbo.Users");
-            DropForeignKey("dbo.Articles", "AuthorId", "dbo.Users");
             DropForeignKey("dbo.Comments", "ArticleId", "dbo.Articles");
             DropIndex("dbo.NewsCategories", new[] { "Name" });
             DropIndex("dbo.UserRoles", new[] { "RoleId" });
@@ -147,16 +121,27 @@
             DropIndex("dbo.Users", new[] { "Email" });
             DropIndex("dbo.Comments", new[] { "ArticleId" });
             DropIndex("dbo.Comments", new[] { "AuthorId" });
-            DropIndex("dbo.Articles", new[] { "AuthorId" });
-            DropIndex("dbo.Articles", new[] { "NewsCategoryId" });
-            DropTable("dbo.NewsCategories");
+            AlterColumn("dbo.Users", "Email", c => c.String());
+            AlterColumn("dbo.Users", "Surname", c => c.String());
+            AlterColumn("dbo.Users", "Name", c => c.String());
+            AlterColumn("dbo.NewsCategories", "Name", c => c.String());
+            DropColumn("dbo.Users", "UserName");
+            DropColumn("dbo.Users", "AccessFailedCount");
+            DropColumn("dbo.Users", "LockoutEnabled");
+            DropColumn("dbo.Users", "LockoutEndDateUtc");
+            DropColumn("dbo.Users", "TwoFactorEnabled");
+            DropColumn("dbo.Users", "PhoneNumberConfirmed");
+            DropColumn("dbo.Users", "SecurityStamp");
+            DropColumn("dbo.Users", "EmailConfirmed");
+            DropColumn("dbo.Users", "PasswordHash");
+            DropColumn("dbo.Users", "PhoneNumber");
             DropTable("dbo.Roles");
             DropTable("dbo.UserRoles");
             DropTable("dbo.AppUserLogins");
             DropTable("dbo.AppUserClaims");
-            DropTable("dbo.Users");
             DropTable("dbo.Comments");
-            DropTable("dbo.Articles");
+            AddForeignKey("dbo.Articles", "AuthorId", "dbo.Users", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Articles", "NewsCategoryId", "dbo.NewsCategories", "Id", cascadeDelete: true);
         }
     }
 }

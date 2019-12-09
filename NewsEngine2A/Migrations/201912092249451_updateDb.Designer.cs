@@ -7,18 +7,18 @@ namespace NewsEngine2A.Context.Config
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0-preview1-19506-01")]
-    public sealed partial class i : IMigrationMetadata
+    public sealed partial class updateDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(i));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201912061024072_i"; }
+            get { return "201912092249451_updateDb"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target
