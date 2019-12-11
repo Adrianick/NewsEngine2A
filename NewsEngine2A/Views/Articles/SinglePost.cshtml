@@ -63,7 +63,7 @@
                 <!-- Post Content -->
                 <div class="post-content">
                     <a href="#" class="post-cata cata-sm cata-success">@Model[1].NewsCategory.Name</a>
-                        <a href="video-post.html" class="post-title">@Model[1].Title</a>
+                        <a href="@Url.Action("SinglePost", "Articles", new {articleId = @Model[1].Id})" class="post-title">@Model[1].Title</a>
                     <div class="post-meta d-flex">
                         <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 18</a>
                         <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 32</a>
@@ -81,7 +81,7 @@
                 <!-- Post Content -->
                 <div class="post-content">
                     <a href="#" class="post-cata cata-sm cata-business">@Model[2].NewsCategory.Name</a>
-                    <a href="video-post.html" class="post-title">@Model[2].Title</a>
+                    <a href="@Url.Action("SinglePost", "Articles", new {articleId = @Model[2].Id})" class="post-title">@Model[2].Title</a>
                     <div class="post-meta d-flex">
                         <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 25</a>
                         <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 25</a>
@@ -112,7 +112,7 @@
 
                             <!-- Post Content -->
                             <div class="post-content mt-0">
-                                <a href="#" class="post-cata cata-sm cata-danger">@Model[0].NewsCategory.Name</a>
+                                <a href="@Url.Action("CategoryGrid", "Articles", routeValues: new { categoryName = @Model[0].NewsCategory.Name })" class="post-cata cata-sm cata-danger">@Model[0].NewsCategory.Name</a>
                                 <a href="single-post.html" class="post-title mb-2">@Model[0].Headline</a>
 
                                 <div class="d-flex justify-content-between mb-30">
@@ -148,15 +148,6 @@
                                 <li>When the seeds start to crackle, add ginger, and green chillies. Sauté for a minute.</li>
                                 <li>Add tomatoes and a little salt. Mix well. Cook for about 5 mins with occasional stirring.</li>
                             </ul>
-
-                            <!-- Post Tags -->
-                            <div class="post-tags mt-30">
-                                <ul>
-                                    <li><a href="#">HealthFood</a></li>
-                                    <li><a href="#">Sport</a></li>
-                                    <li><a href="#">Game</a></li>
-                                </ul>
-                            </div>
 
 
                             <!-- Comment Area Start -->

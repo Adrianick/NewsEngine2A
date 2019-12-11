@@ -68,10 +68,10 @@
                             @*<a href="archive-grid.html" class="active"><i class="fa fa-th-large" aria-hidden="true"></i></a>
         <a href="archive-list.html"><i class="fa fa-list-ul" aria-hidden="true"></i></a>*@
 
-                            <a href=" @Url.Action("CategoryGrid", "Articles", routeValues: new { categoryName = "technology" })">
+                            <a href=" @Url.Action("CategoryGrid", "Articles", routeValues: new { categoryName = @Model[0].NewsCategory.Name })">
                                 <i class="fa fa-th-large" aria-hidden="true"></i>
                             </a>
-                            <a href=" @Url.Action("CategoryList", "Articles", routeValues: new { categoryName = "technology" })">
+                            <a href=" @Url.Action("CategoryList", "Articles", routeValues: new { categoryName = @Model[0].NewsCategory.Name })">
                                 <i class="fa fa-list-ul" aria-hidden="true"></i>
                             </a>
                         </div>
