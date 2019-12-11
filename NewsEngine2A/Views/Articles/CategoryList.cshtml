@@ -1,0 +1,181 @@
+﻿@using NewsEngine2A.Models.News
+@model List<NewsEngine2A.Models.News.Article>
+
+@{
+    ViewBag.Title = "Category";
+    IList<NewsEngine2A.Models.News.Article> recentNews = ViewBag.RecentNews;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>Vizew - Blog &amp; Magazine HTML Template</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="../../Content/style.css">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="vizew-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">News by Category @Model[0].NewsCategory.Name</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+    <!-- ##### Archive List Posts Area Start ##### -->
+    <div class="vizew-archive-list-posts-area mb-80">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <!-- Archive Catagory & View Options -->
+                    <div class="archive-catagory-view mb-50 d-flex align-items-center justify-content-between">
+                        <!-- Catagory -->
+                        <div class="archive-catagory">
+                            <h4><i class="fa fa-music" aria-hidden="true"></i> @Model[0].NewsCategory.Name </h4>
+                        </div>
+                        <!-- View Options -->
+                        <div class="view-options">
+                            <a href=" @Url.Action("CategoryGrid", "Articles", routeValues: new { categoryName = "technology" })">
+                                <i class="fa fa-th-large" aria-hidden="true"></i>
+                            </a>
+                            <a href=" @Url.Action("CategoryList", "Articles", routeValues: new { categoryName = "technology" })">
+                                <i class="fa fa-list-ul" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                @foreach (var article in Model)
+                {
+                    <!-- Single Post Area -->
+                    <div class="single-post-area style-2">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <img src="../../Content/img/bg-img/21.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <!-- Post Content -->
+                                <div class="post-content mt-0">
+                                    <a href="#" class="post-cata cata-sm cata-success">@article.NewsCategory.Name</a>
+                                    <a href="@Url.Action("SinglePost", "Articles", routeValues: new { articleId = @article.Id})" class="post-title mb-2">@article.Headline</a>
+                                    <div class="post-meta d-flex align-items-center mb-2">
+                                        <a href="#" class="post-author">By @article.User.Name @article.User.Surname</a>
+                                        <i class="fa fa-circle" aria-hidden="true"></i>
+                                        <a href="#" class="post-date">@article.CreateDate</a>
+                                    </div>
+                                    <p class="mb-2">@article.Content</p>
+                                    <div class="post-meta d-flex">
+                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 32</a>
+                                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 42</a>
+                                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 7</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                    <!-- Pagination -->
+                    <nav class="mt-50">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="sidebar-area">
+
+                        <!-- ***** Single Widget ***** -->
+                        <div class="single-widget followers-widget mb-50">
+                            <a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i><span class="counter">198</span><span>Fan</span></a>
+                            <a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i><span class="counter">220</span><span>Followers</span></a>
+                            <a href="#" class="google"><i class="fa fa-google" aria-hidden="true"></i><span class="counter">140</span><span>Subscribe</span></a>
+                        </div>
+
+                        <!-- ***** Single Widget ***** -->
+                        <div class="single-widget latest-video-widget mb-50">
+                            <!-- Section Heading -->
+                            <div class="section-heading style-2 mb-30">
+                                <h4>Latest Video</h4>
+                                <div class="line"></div>
+                            </div>
+                            
+                            @foreach (var art in recentNews)
+                            {
+                                <!-- Single Blog Post -->
+                                <div class="single-post-area mb-30">
+                                    <!-- Post Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <img src="img/bg-img/13.jpg" alt="">
+                                    </div>
+
+                                    <!-- Post Content -->
+                                    <div class="post-content">
+                                        <a href="@Url.Action("CategoryGrid", "Articles", new {categoryName = @art.NewsCategory.Name})" class="post-cata cata-sm cata-success">@art.NewsCategory.Name</a>
+                                    <a href="@Url.Action("SinglePost", "Articles", routeValues: new { articleId = @art.Id})" class="post-title">@art.Title <br/> @art.Headline</a>
+                                        <div class="post-meta d-flex">
+                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
+                                            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 22</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="../../Scripts/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="../../Scripts/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../../Scripts/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="../../Scripts/plugins.js"></script>
+    <!-- Active js -->
+    <script src="../../Scripts/active.js"></script>
+</body>
+
+</html>

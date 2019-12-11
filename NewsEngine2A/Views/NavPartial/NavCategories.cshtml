@@ -1,0 +1,7 @@
+﻿@using NewsEngine2A.Models.News
+@model List<NewsEngine2A.Models.News.NewsCategory>
+
+@foreach (var cat in Model)
+{
+    <li>@Html.ActionLink("- " + @cat.Name, "CategoryGrid", "Articles", new {categoryName = @cat.Name}, htmlAttributes:null)</li>
+}

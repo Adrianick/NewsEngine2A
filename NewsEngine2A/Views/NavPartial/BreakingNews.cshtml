@@ -1,0 +1,7 @@
+﻿@using NewsEngine2A.Models.News
+@model List<NewsEngine2A.Models.News.Article>
+
+@foreach (var article in Model)
+{
+    <li>@article.Headline</li>
+}
