@@ -8,17 +8,33 @@ namespace NewsEngine2A.Controllers
     public class ArticlesController : Controller
     {
         private readonly NewsEngineContext _context = new NewsEngineContext();
-        public ActionResult CategoryList(string categoryName = "Technology")
+        public ActionResult CategoryList(string categoryName = "Technology", string orderBy = null)
         {
             var articles = _context.Articles.Where(a => a.NewsCategory.Name.Equals(categoryName)).ToList();
+
+            if (orderBy != null)
+            {
+                if (orderBy == "name")
+                    articles = articles.OrderBy(a => a.Title).ToList();
+                if (orderBy == "date")
+                    articles = articles.OrderBy(a => a.CreateDate).ToList();
+            }
 
             ViewBag.RecentNews = _context.Articles.OrderByDescending(a => a.CreateDate).Take(4).ToList();
 
             return View(articles);
         }
-        public ActionResult CategoryGrid(string categoryName = "Technology")
+        public ActionResult CategoryGrid(string categoryName = "Technology", string orderBy = null)
         {
             var articles = _context.Articles.Where(a => a.NewsCategory.Name.Equals(categoryName)).ToList();
+
+            if (orderBy != null)
+            {
+                if (orderBy == "name")
+                    articles = articles.OrderBy(a => a.Title).ToList();
+                if (orderBy == "date")
+                    articles = articles.OrderBy(a => a.CreateDate).ToList();
+            }
 
             ViewBag.RecentNews = _context.Articles.OrderByDescending(a => a.CreateDate).Take(4).ToList();
 
