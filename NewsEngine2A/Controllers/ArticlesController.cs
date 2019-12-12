@@ -1,6 +1,8 @@
 ﻿using NewsEngine2A.Context;
+using NewsEngine2A.Models.News;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace NewsEngine2A.Controllers
@@ -64,13 +66,24 @@ namespace NewsEngine2A.Controllers
             articles.Add(prevArticle);
             articles.Add(nextArticle);
 
+            ViewBag.Comments = _context.Comments.Where(c => c.ArticleId == articleId).ToList();
+
             return View(articles);
         }
 
-        public ActionResult LookForArticle(string articleName = null)
+        public async Task<ActionResult> AddComment(string message, int articleId, int authorId)
         {
+            Comment newComment = new Comment()
+            {
+                ArticleId = articleId,
+                AuthorId = authorId,
+                CreateDate = DateTime.UtcNow,
+                Content = message
+            };
+            _context.Comments.Add(newComment);
+            await _context.SaveChangesAsync();
 
-            return View(SinglePost(5));
+            return RedirectToAction("SinglePost", new { articleId = articleId });
         }
     }
 }

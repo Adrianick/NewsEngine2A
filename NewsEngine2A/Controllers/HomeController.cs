@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using NewsEngine2A.Context;
+using NewsEngine2A.Models.News;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -9,13 +11,32 @@ namespace NewsEngine2A.Controllers
     public class HomeController : Controller
     {
         private readonly NewsEngineContext _context = new NewsEngineContext();
-        public ActionResult Index()
+        public ActionResult Index(string search = null)
         {
             var articles = _context.Articles.OrderByDescending(a => a.CreateDate).ToList();
+            var finalResult = new List<Article>();
+            if (search != null)
+            {
+                var listSearch = search.Split();
+                foreach (var s in listSearch)
+                {
+                    var tempArticles = articles.Where(a => (a.Title.Contains(s) || a.Content.Contains(s) || a.Headline.Contains(s))).ToList();
+                    if (tempArticles != null)
+                    {
+                        finalResult.AddRange(tempArticles);
+                    }
+                }
+
+                finalResult = finalResult.Distinct().ToList();
+            }
+            else
+            {
+                finalResult = articles;
+            }
 
             ViewBag.ArticlesWithMostComments = articles.Where(a => a.Comments.Count > 0).OrderByDescending(a => a.Comments.Count).Take(3).ToList();
 
-            return View(articles);
+            return View(finalResult);
         }
         //[Authorize(Roles = "Admin")]
         [Authorize]

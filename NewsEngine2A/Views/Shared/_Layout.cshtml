@@ -37,21 +37,19 @@
                             <!-- Top Social Info -->
                             
                             <!-- Top Search Area -->
-                            @* 
-                            @using(Html.BeginForm("LookForArticle","Articles", FormMethod.Get))
-                            {
-                                @Html.TextBoxFor(m => m.Query) seach comentarii, sortare 
-
-                                <div>
-                                    <input type="submit" value="Search" />
-                                </div>
-                            }*@
+                            
+                               
+                            
                             <div class="top-search-area">
-                                <form action="index.html" method="post">
-                                    <input type="search" name="top-search" id="topSearch" placeholder="Search...">
-                                    <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
+
+                                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                                {
+                                    <form action="index.html" method="post">
+                                        <input type="search" name="search" id="topSearch" placeholder="Search...">
+                                        <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </form>
+                                }
+                                </div>
                             <!-- Login -->
                             <a href="@Url.Action("Login", "Account")" class="login-btn"><i class="fa fa-user" aria-hidden="true"></i></a>
                             <span><a href="https://localhost:44377/account/logout">@User.Identity.Name</a></span>
