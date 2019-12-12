@@ -21,9 +21,6 @@
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="../../Content/style.css">
-
 </head>
 
 <body>
@@ -81,7 +78,7 @@
                         <div class="row align-items-center">
                             <div class="col-12 col-md-6">
                                 <!-- Post Thumbnail -->
-                                <div class="post-thumbnail">
+                                <div class="post-thumbnail"  onclick="goToPage('@Url.Action("SinglePost", "Articles", routeValues: new { articleId = @article.Id})')" style="cursor: pointer">
                                     <img src="../../Content/img/bg-img/21.jpg" alt="">
                                 </div>
                             </div>
@@ -142,7 +139,7 @@
                                 <!-- Single Blog Post -->
                                 <div class="single-post-area mb-30">
                                     <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
+                                    <div class="post-thumbnail"  onclick="goToPage('@Url.Action("SinglePost", "Articles", routeValues: new { articleId = @art.Id})')" style="cursor: pointer">
                                         <img src="img/bg-img/13.jpg" alt="">
                                     </div>
 
@@ -165,17 +162,6 @@
             </div>
         </div>
     </div>
-<!-- ##### All Javascript Script ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="../../Scripts/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="../../Scripts/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="../../Scripts/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="../../Scripts/plugins.js"></script>
-    <!-- Active js -->
-    <script src="../../Scripts/active.js"></script>
 </body>
 
 </html>

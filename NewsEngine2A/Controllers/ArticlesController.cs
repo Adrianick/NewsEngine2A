@@ -8,7 +8,7 @@ namespace NewsEngine2A.Controllers
     public class ArticlesController : Controller
     {
         private readonly NewsEngineContext _context = new NewsEngineContext();
-        public ActionResult CategoryList(string categoryName)
+        public ActionResult CategoryList(string categoryName = "Technology")
         {
             var articles = _context.Articles.Where(a => a.NewsCategory.Name.Equals(categoryName)).ToList();
 
@@ -16,7 +16,7 @@ namespace NewsEngine2A.Controllers
 
             return View(articles);
         }
-        public ActionResult CategoryGrid(string categoryName)
+        public ActionResult CategoryGrid(string categoryName = "Technology")
         {
             var articles = _context.Articles.Where(a => a.NewsCategory.Name.Equals(categoryName)).ToList();
 
@@ -25,18 +25,36 @@ namespace NewsEngine2A.Controllers
             return View(articles);
         }
 
-        public ActionResult SinglePost(int articleId)
+        public ActionResult SinglePost(int articleId = 5)
         {
             var articles = _context.Articles.Where(a => a.Id == articleId).ToList();
             DateTime date = articles[0].CreateDate;
-            var prevArticle = _context.Articles.Where(a => a.CreateDate < date)
+            int idPrincipal = articles[0].Id;
+            var prevArticle = _context.Articles.Where(a => a.CreateDate < date && a.Id != idPrincipal)
                 .OrderByDescending(a => a.CreateDate).FirstOrDefault();
-            var nextArticle = _context.Articles.Where(a => a.CreateDate > date)
+            var nextArticle = _context.Articles.Where(a => a.CreateDate > date && a.Id != idPrincipal)
                 .OrderBy(a => a.CreateDate).FirstOrDefault();
+
+
+
+            if (prevArticle == null)
+            {
+                prevArticle = _context.Articles.OrderByDescending(a => a.CreateDate).FirstOrDefault();
+            }
+            if (nextArticle == null)
+            {
+                nextArticle = _context.Articles.OrderBy(a => a.CreateDate).FirstOrDefault();
+            }
             articles.Add(prevArticle);
             articles.Add(nextArticle);
 
             return View(articles);
+        }
+
+        public ActionResult LookForArticle(string articleName = null)
+        {
+
+            return View(SinglePost(5));
         }
     }
 }
