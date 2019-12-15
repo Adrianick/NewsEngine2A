@@ -1,0 +1,21 @@
+﻿@model NewsEngine2A.Models.News.Article
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Create a new category</h6>
+    </div>
+    <div class="card-body">
+        @{
+            Html.BeginForm("New", "Category", FormMethod.Post);
+
+            @Html.AntiForgeryToken();
+
+            @Html.Label("Name", "Category Name");
+            @Html.TextBox("Name", null, new { @class = "form-control" });
+            @Html.ValidationMessageFor(m => m.Title, "Name is mandatory", new { @class = "text-danger " });
+            <br />
+            <button class="btn btn-success" type="submit">Add Category</button>
+
+            Html.EndForm();
+        }
+    </div>
+</div>
