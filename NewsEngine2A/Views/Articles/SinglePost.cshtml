@@ -184,10 +184,25 @@
                                                 <div class="comment-meta">
                                                     <a href="#" class="comment-date">@comment.CreateDate</a>
                                                     <h6>@comment.User.Name @comment.User.Surname</h6>
-                                                    <p>@comment.Content</p>
+                                                    @if (User.Identity.GetUserId() == @comment.User.Id.ToString() || User.IsInRole("Admin"))
+                                                    {
+                                                        var ceva = "editableComment" + @comment.Id;
+                                                        var pressed = "editPressed" + @comment.Id;
+                                                        <p id="@ceva" contenteditable="false">@comment.Content</p>
+                                                                                                              
+                                                        <a class="editPressed" id="@pressed" onclick="saveEditedComment(@comment.Id, @Model[0].Id)">Save</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>@comment.Content</p>
+                                                    }
                                                     <div class="d-flex align-items-center">
-                                                        <a href="#" class="like">like</a>
-                                                        <a href="#" class="reply">Reply</a>
+
+                                                        @if (User.Identity.GetUserId() == @comment.User.Id.ToString() || User.IsInRole("Admin"))
+                                                        {
+                                                            <a href="#" class="like" onclick="editComment(@comment.Id)">Edit</a>
+                                                            <a href="@Url.Action("DeleteComment", "Articles", routeValues: new {commentId = @comment.Id, articleId = @Model[0].Id})" class="reply">Delete</a>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>

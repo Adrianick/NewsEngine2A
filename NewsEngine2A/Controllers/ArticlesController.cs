@@ -85,5 +85,29 @@ namespace NewsEngine2A.Controllers
 
             return RedirectToAction("SinglePost", new { articleId = articleId });
         }
+
+        public async Task<ActionResult> DeleteComment(int commentId, int articleId)
+        {
+            var theComment = _context.Comments.FirstOrDefault(x => x.Id == commentId);
+            if (theComment != null)
+            {
+                _context.Comments.Remove(theComment);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("SinglePost", new { articleId = articleId });
+        }
+
+        public async Task<ActionResult> EditComment(int commentId, int articleId, string newContent)
+        {
+            var theComment = _context.Comments.FirstOrDefault(x => x.Id == commentId);
+            if (theComment != null)
+            {
+                theComment.Content = newContent;
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("SinglePost", new { articleId = articleId });
+        }
     }
 }

@@ -176,6 +176,31 @@
         window.location.href = "CategoryGrid?"+value;
         return false;
     }
+
+    function editComment(commentId) {
+        var value = $("#editableComment" + commentId).prop("contenteditable");
+        if (value == "false") {
+            $("#editableComment" + commentId).attr("contenteditable", "true");
+        } else {
+            $("#editableComment" + commentId).attr("contenteditable", "false");
+        }
+        $("#editPressed" + commentId).css("visibility", "visible");
+    }
+
+    function saveEditedComment(commentId, articleId) {
+        var newComment = $('#editableComment' + commentId).text();
+        console.log(commentId + "   " + articleId);
+        window.location.href = "EditComment?commentId=" + commentId + "&articleId=" + articleId + "&newContent=" + newComment;
+        return false;
+    }
+
+
 </script>
+
+<style>
+    .editPressed {
+        visibility: hidden;
+    }
+</style>
 </body>
 </html>
