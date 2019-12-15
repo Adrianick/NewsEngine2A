@@ -1,0 +1,41 @@
+﻿@model NewsEngine2A.Models.News.Article
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Create a new article</h6>
+    </div>
+    <div class="card-body">
+        @{
+            Html.BeginForm("New", "Article", FormMethod.Post, new { enctype = "multipart/form-data" });
+
+            @Html.AntiForgeryToken();
+
+            @Html.Label("Title", "Article Title");
+            @Html.TextBox("Title", null, new { @class = "form-control" });
+            @Html.ValidationMessageFor(m => m.Title, "Title is mandatory", new { @class = "text-danger " });
+            <br />
+            @Html.Label("Headline", "Article Headline");
+            @Html.TextBox("Headline", null, new { @class = "form-control" });
+            @Html.ValidationMessageFor(m => m.Headline, "Headline is mandatory", new { @class = "text-danger " });
+            <br />
+            @Html.Label("Content", "Article Content");
+            @Html.TextArea("Content", null, new { @class = "form-control" });
+            @Html.ValidationMessageFor(m => m.Title, "Content is mandatory", new { @class = "text-danger " });
+            <br />
+            @Html.Label("Thumbnail", "Thumbnail Image");
+            <input type="file" name="upload" required />
+            @Html.ValidationMessageFor(m => m.Title, "Image is mandatory", new { @class = "text-danger " });
+            <br />
+            @Html.Label("Category", "Article Category");
+            <br />
+            @Html.DropDownListFor(c => c.NewsCategoryId, new SelectList(@ViewBag.categories, "Value", "Text"),
+     "Please select a category", new { @class = "form-control" });
+            @Html.ValidationMessageFor(m => m.Title, "Category is mandatory", new { @class = "text-danger " });
+            <br />
+            <button class="btn btn-success" type="submit">Add Article</button>
+
+            @Html.Hidden("CreateDate", DateTime.Now);
+
+            Html.EndForm();
+        }
+    </div>
+</div>

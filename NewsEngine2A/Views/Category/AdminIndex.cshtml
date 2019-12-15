@@ -1,0 +1,51 @@
+﻿<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Articles List</h6>
+        <a href="/admin/category/new" class="btn btn-success">Create a new Category +</a>
+    </div>
+    <div class="card-body">
+
+        @{
+            var tempData = TempData["message"];
+            if (TempData["message"] != null && TempData["type"] != null)
+            {
+                <div class="alert alert-@TempData["type"].ToString() alert-dismissible fade show" role="alert">
+                    <strong>Message</strong>
+                    <br />
+                    @TempData["message"].ToString()
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+        }
+
+
+        <table id="articleTable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@ViewBag.categories != null)
+                {
+                    foreach (NewsEngine2A.Models.News.NewsCategory entry in @ViewBag.categories)
+                    {
+                        <tr>
+                            <td>@entry.Name</td>
+
+                            <td class="text-center">
+                                <form method="post" action="/admin/category/delete/@entry.Id">
+                                    @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

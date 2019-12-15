@@ -1,0 +1,31 @@
+﻿@model NewsEngine2A.Models.News.Comment
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Edit a comment</h6>
+    </div>
+    <div class="card-body">
+        @{
+            Html.BeginForm("Edit", "Comment", FormMethod.Post, new { enctype = "multipart/form-data" });
+
+            @Html.HttpMethodOverride(HttpVerbs.Put)
+            @Html.AntiForgeryToken();
+
+            @Html.Label("Content", "Content");
+            @Html.TextBox("Content", null, new { @class = "form-control" });
+            @Html.ValidationMessageFor(m => m.Content, "Content is mandatory", new { @class = "text-danger " });
+
+            <br />
+
+            @Html.Label("ArticleId", "ArticleId");
+            @Html.TextBox("ArticleId", null, new { @class = "form-control", disabled = "disabled" });
+            @Html.ValidationMessageFor(m => m.Content, "Content is mandatory", new { @class = "text-danger " });
+
+            <br />
+            <button class="btn btn-success" type="submit">Edit Comment</button>
+
+            @Html.Hidden("EditDate", DateTime.Now);
+
+            Html.EndForm();
+        }
+    </div>
+</div>

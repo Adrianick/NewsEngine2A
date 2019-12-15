@@ -6,7 +6,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace NewsEngine2A.Context
 {
-    public class NewsEngineContext : IdentityDbContext<User, Role, int, AppUserLogin, UserRole, AppUserClaim>
+    public class NewsEngineContext : IdentityDbContext//<User, Role, int, AppUserLogin, UserRole, AppUserClaim>
     {
         public NewsEngineContext() : base("name=NewsEngineContext")
         {

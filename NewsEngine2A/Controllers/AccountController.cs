@@ -172,6 +172,7 @@ namespace NewsEngine2A.Controllers
                 var user = new User { UserName = model.Email, Email = model.Email, Name = model.Name, Surname = model.Surname, PhoneNumber = model.Phone };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
+                await UserManager.AddToRoleAsync(user.Id, "Registered");
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

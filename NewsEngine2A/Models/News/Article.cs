@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewsEngine2A.Models.News
@@ -8,10 +9,18 @@ namespace NewsEngine2A.Models.News
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "The article should have a title.")]
+        [MinLength(4)]
+        [MaxLength(55)]
         public string Title { get; set; }
 
+        [Required(ErrorMessage = "The article should have a headline.")]
+        [MinLength(4)]
+        [MaxLength(55)]
         public string Headline { get; set; }
 
+        [Required(ErrorMessage = "The article should have content.")]
+        [MinLength(4)]
         public string Content { get; set; }
 
         public DateTime CreateDate { get; set; }

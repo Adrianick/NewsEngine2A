@@ -1,0 +1,45 @@
+﻿@model NewsEngine2A.Models.News.Article
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Add a comment</h6>
+    </div>
+    <div class="card-body">
+        @{
+            var tempData = TempData["message"];
+            if (TempData["message"] != null && TempData["type"] != null)
+            {
+                <div class="alert alert-@TempData["type"].ToString() alert-dismissible fade show" role="alert">
+                    <strong>Message</strong>
+                    <br />
+                    @TempData["message"].ToString()
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+        }
+
+
+        @{
+            Html.BeginForm("New", "Comment", FormMethod.Post, new { enctype = "multipart/form-data" });
+
+            @Html.AntiForgeryToken();
+
+            @Html.Label("Content", "Comment Content");
+            @Html.TextArea("Content", null, new { @class = "form-control" });
+            @Html.ValidationMessageFor(m => m.Title, "Content is mandatory", new { @class = "text-danger " });
+            <br />
+            @Html.Label("Article", "Article");
+            <br />
+            @Html.DropDownList("ArticleId", new SelectList(@ViewBag.articles, "Value", "Text"),
+     "Please select an article", new { @class = "form-control" });
+            @Html.ValidationMessageFor(m => m.Title, "Category is mandatory", new { @class = "text-danger " });
+            <br />
+            <button class="btn btn-success" type="submit">Add Comment to Article</button>
+
+            @Html.Hidden("CreateDate", DateTime.Now);
+
+            Html.EndForm();
+        }
+    </div>
+</div>

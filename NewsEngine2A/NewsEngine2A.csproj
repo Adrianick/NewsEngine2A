@@ -161,12 +161,16 @@
     <Compile Include="Context\Config\Configuration.cs" />
     <Compile Include="Context\NewsEngineContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\NavPartialController.cs" />
     <Compile Include="Controllers\HomeController%281%29.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -177,6 +181,10 @@
     <Compile Include="Migrations\201912092249451_updateDb.cs" />
     <Compile Include="Migrations\201912092249451_updateDb.designer.cs">
       <DependentUpon>201912092249451_updateDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912151600008_mergee.cs" />
+    <Compile Include="Migrations\201912151600008_mergee.designer.cs">
+      <DependentUpon>201912151600008_mergee.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -196,6 +204,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\classy-nav.css" />
+    <Content Include="Content\datatables\dataTables.bootstrap4.css" />
+    <Content Include="Content\datatables\dataTables.bootstrap4.js" />
+    <Content Include="Content\datatables\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\datatables\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\datatables\jquery.dataTables.js" />
+    <Content Include="Content\datatables\jquery.dataTables.min.js" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\classy.eot" />
     <Content Include="Content\fonts\classy.svg" />
@@ -274,6 +288,7 @@
     <Content Include="Content\magnific-popup.css" />
     <Content Include="Content\nice-select.css" />
     <Content Include="Content\owl.carousel.min.css" />
+    <Content Include="Content\sb-admin.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themify-icons.css" />
     <Content Include="favicon.ico" />
@@ -334,6 +349,15 @@
     <Content Include="Views\Articles\CategoryGrid.cshtml" />
     <Content Include="Views\Articles\CategoryList.cshtml" />
     <Content Include="Views\Articles\SinglePost.cshtml" />
+    <Content Include="Views\Article\AdminEdit.cshtml" />
+    <Content Include="Views\Article\AdminIndex.cshtml" />
+    <Content Include="Views\Article\AdminNew.cshtml" />
+    <Content Include="Views\Category\AdminIndex.cshtml" />
+    <Content Include="Views\Category\AdminNew.cshtml" />
+    <Content Include="Views\Comment\AdminEdit.cshtml" />
+    <Content Include="Views\Comment\AdminIndex.cshtml" />
+    <Content Include="Views\Comment\AdminNew.cshtml" />
+    <Content Include="Views\Users\AdminIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -356,6 +380,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201912092249451_updateDb.resx">
       <DependentUpon>201912092249451_updateDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912151600008_mergee.resx">
+      <DependentUpon>201912151600008_mergee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

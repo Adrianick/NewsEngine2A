@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using NewsEngine2A.Models.News;
 using System.Collections.Generic;
@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 
 namespace NewsEngine2A.Models.User
 {
@@ -56,6 +55,6 @@ namespace NewsEngine2A.Models.User
 
     //public class AppRole : IdentityRole<int, AppUserRole> { }
 
-   
+
 
 }
