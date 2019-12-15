@@ -71,7 +71,7 @@ namespace NewsEngine2A.Controllers
             return View(articles);
         }
 
-        public async Task<ActionResult> AddComment(string message, int articleId, int authorId)
+        public async Task<ActionResult> AddComment(string message, int articleId, string authorId)
         {
             Comment newComment = new Comment()
             {

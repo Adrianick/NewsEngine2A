@@ -1,13 +1,12 @@
-﻿using System;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using NewsEngine2A.Context;
 using NewsEngine2A.Identity;
-using NewsEngine2A.Models;
 using NewsEngine2A.Models.User;
 using Owin;
+using System;
 
 namespace NewsEngine2A
 {
@@ -20,6 +19,8 @@ namespace NewsEngine2A
             app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
+            //app.CreatePerOwinContext<UserManager<User>>(UserManager<User>.);
+
             // Enable the application to use a cookie to store information for the signed in user
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
 
@@ -31,12 +32,14 @@ namespace NewsEngine2A
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
-                    // Enables the application to validate the security stamp when the user logs in.
-                    // This is a security feature which is used when you change a password or add an external login to your account.  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<AppUserManager, User, int>(
+                    //OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<AppUserManager, User, int>(
+                    //    validateInterval: TimeSpan.FromSeconds(15),
+                    //    regenerateIdentityCallback: (manager, user) => user.GenerateUserIdentityAsync(manager),
+                    //    getUserIdCallback: (id) => id.GetUserId<int>())
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<UserManager<User>, User, string>(
                         validateInterval: TimeSpan.FromSeconds(15),
-                        regenerateIdentityCallback: (manager, user) => user.GenerateUserIdentityAsync(manager),
-                        getUserIdCallback: (id) => id.GetUserId<int>())
+                        regenerateIdentityCallback: (manager, user) => manager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie),
+                        getUserIdCallback: (id) => id.GetUserId())
                 }
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

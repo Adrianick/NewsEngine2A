@@ -52,7 +52,7 @@
                                 </div>
                             <!-- Login -->
                             <a href="@Url.Action("Login", "Account")" class="login-btn"><i class="fa fa-user" aria-hidden="true"></i></a>
-                            <span><a href="https://localhost:44377/account/logout">@User.Identity.Name</a></span>
+                            <span><a href="https://localhost:44377/account/logout">@User.Identity.Name @User.IsInRole("Admin")</a></span>
                         </div>
                     </div>
                 </div>

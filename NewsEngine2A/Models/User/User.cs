@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 using NewsEngine2A.Models.News;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace NewsEngine2A.Models.User
 {
-    public class User : IdentityUser<int, AppUserLogin, UserRole, AppUserClaim>
+    public class User : IdentityUser//<int, AppUserLogin, UserRole, AppUserClaim>
     {
         //public int Id { get; set; }
 
@@ -39,19 +36,19 @@ namespace NewsEngine2A.Models.User
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
-            return userIdentity;
-        }
+        //public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
+        //{
+        //    // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+        //    var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+        //    // Add custom user claims here
+        //    return userIdentity;
+        //}
     }
-    public class AppUserLogin : IdentityUserLogin<int> { }
+    //public class AppUserLogin : IdentityUserLogin<int> { }
 
     //public class AppUserRole : IdentityUserRole<int> { }
 
-    public class AppUserClaim : IdentityUserClaim<int> { }
+    //public class AppUserClaim : IdentityUserClaim<int> { }
 
     //public class AppRole : IdentityRole<int, AppUserRole> { }
 

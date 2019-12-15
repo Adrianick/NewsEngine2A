@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using NewsEngine2A.Helpers.UserHelper;
+using NewsEngine2A.Models.News;
+using System;
 using System.Data.Entity.Migrations;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace NewsEngine2A.Context.Config
@@ -36,35 +40,31 @@ namespace NewsEngine2A.Context.Config
             /*
              * Create roles if not existing
              */
-            //if (!context.Roles.Any())
-            //{
-            //    System.Diagnostics.Debug.WriteLine("roles");
-            //    Role candidate = new Role
-            //    {
-            //        Id = 1,
-            //        Name = UserRoles.Unregistered,
-            //    };
-            //    context.Roles.Add(candidate);
-            //    Role company = new Role
-            //    {
-            //        Id = 2,
-            //        Name = UserRoles.Registered,
-            //    };
-            //    context.Roles.Add(company);
-            //    Role editor = new Role
-            //    {
-            //        Id = 3,
-            //        Name = UserRoles.Editor,
-            //    };
-            //    context.Roles.Add(editor);
-            //    Role admin = new Role
-            //    {
-            //        Id = 4,
-            //        Name = UserRoles.Admin,
-            //    };
-            //    context.Roles.Add(admin);
-            //    context.SaveChanges();
-            //}
+            if (!context.Roles.Any())
+            {
+                System.Diagnostics.Debug.WriteLine("roles");
+                IdentityRole candidate = new IdentityRole()
+                {
+                    Name = UserRoles.Unregistered,
+                };
+                context.Roles.Add(candidate);
+                IdentityRole company = new IdentityRole
+                {
+                    Name = UserRoles.Registered,
+                };
+                context.Roles.Add(company);
+                IdentityRole editor = new IdentityRole
+                {
+                    Name = UserRoles.Editor,
+                };
+                context.Roles.Add(editor);
+                IdentityRole admin = new IdentityRole
+                {
+                    Name = UserRoles.Admin,
+                };
+                context.Roles.Add(admin);
+                context.SaveChanges();
+            }
 
             ///*
             // * Create a demo user admin 
@@ -144,33 +144,126 @@ namespace NewsEngine2A.Context.Config
             //    context.SaveChanges();
             //}
 
-            ///*
-            // * Create some articles for test
-            // */
-            //if (!context.Articles.Any())
-            //{
-            //    context.Articles.Add(new Article()
-            //    {
-            //        Title = "Titluuu",
-            //        Headline = "Un articol smek",
-            //        Content = "Acest articol vb despre cat de smek e ssa fii smekk",
-            //        CreateDate = DateTime.Now,
-            //        NewsCategoryId = context.NewsCategories.FirstOrDefault().Id,
-            //        AuthorId = context.Users.FirstOrDefault().Id
-            //    });
+            ///
 
-            //    context.Articles.Add(new Article()
-            //    {
-            //        Title = "Titluuu",
-            //        Headline = "Un articol smek 2",
-            //        Content = "Acest articol vb despre cat de smek e ssa fii smekk",
-            //        CreateDate = DateTime.Now,
-            //        NewsCategoryId = context.NewsCategories.FirstOrDefault().Id,
-            //        AuthorId = context.Users.FirstOrDefault().Id
-            //    });
 
-            //    context.SaveChanges();
-            //}
+            if (!context.NewsCategories.Any())
+            {
+                context.NewsCategories.Add(new NewsCategory()
+                {
+                    Id = 1,
+                    Name = "Technology"
+                });
+                context.NewsCategories.Add(new NewsCategory()
+                {
+                    Id = 2,
+                    Name = "Politics"
+                });
+                context.NewsCategories.Add(new NewsCategory()
+                {
+                    Id = 3,
+                    Name = "Sports"
+                });
+
+                context.SaveChanges();
+            }
+
+
+            if (!context.Articles.Any())
+            {
+                //context.Articles.Add(new Article()
+                //{
+                //    Title = "Titluuu1 ",
+                //    Headline = "Un articol smek",
+                //    Content = "2Acest articol vb despre cat de smek e ssa fii smekk",
+                //    CreateDate = DateTime.Now,
+                //    NewsCategoryId = 1,
+                //    AuthorId = context.Users.FirstOrDefault().Id
+                //});
+                //context.SaveChanges();
+                //context.Articles.Add(new Article()
+                //{
+                //    Title = "Titluuu2",
+                //    Headline = "Un articol tare 2",
+                //    Content = "Acest articol nu e",
+                //    CreateDate = DateTime.Now,
+                //    NewsCategoryId = 2,
+                //    AuthorId = context.Users.FirstOrDefault().Id
+                //});
+                //context.SaveChanges();
+                //context.Articles.Add(new Article()
+                //{
+                //    Title = "Titluu3",
+                //    Headline = "Un articol tare 3",
+                //    Content = "Doar nu e",
+                //    CreateDate = DateTime.Now,
+                //    NewsCategoryId = 2,
+                //    AuthorId = context.Users.FirstOrDefault().Id
+                //});
+                //context.SaveChanges();
+                //context.Articles.Add(new Article()
+                //{
+                //    Title = "Titluu4",
+                //    Headline = "Un articol tare 4",
+                //    Content = "Doar nu e asd",
+                //    CreateDate = DateTime.Now,
+                //    NewsCategoryId = 3,
+                //    AuthorId = context.Users.FirstOrDefault().Id
+                //});
+                //context.SaveChanges();
+                //context.Articles.Add(new Article()
+                //{
+                //    Title = "Titluu5",
+                //    Headline = "Un articol tare 5",
+                //    Content = "Doar nu e taree",
+                //    CreateDate = DateTime.Now,
+                //    NewsCategoryId = 2,
+                //    AuthorId = context.Users.FirstOrDefault().Id
+                //});
+                //context.SaveChanges();
+                //context.Articles.Add(new Article()
+                //{
+                //    Title = "Titluu6",
+                //    Headline = "Un articol tare 6",
+                //    Content = "Doar nu e tot",
+                //    CreateDate = DateTime.Now,
+                //    NewsCategoryId = 1,
+                //    AuthorId = context.Users.FirstOrDefault().Id
+                //});
+                //context.SaveChanges();
+                context.Articles.Add(new Article()
+                {
+                    Title = "Titlwuu7",
+                    Headline = "Un articol tare 7",
+                    Content = "Totsfgnhmghg asda d",
+                    CreateDate = DateTime.Now,
+                    NewsCategoryId = 1,
+                    AuthorId = context.Users.FirstOrDefault().Id
+                });
+                context.SaveChanges();
+                context.Articles.Add(new Article()
+                {
+                    Title = "DAitluu8",
+                    Headline = "Un articol tare 8",
+                    Content = "Doar nu e",
+                    CreateDate = DateTime.Now,
+                    NewsCategoryId = 1,
+                    AuthorId = context.Users.FirstOrDefault().Id
+                });
+                context.SaveChanges();
+                context.Articles.Add(new Article()
+                {
+                    Title = "ATitluu9",
+                    Headline = "Un articol tare 9",
+                    Content = "Doar nu are e",
+                    CreateDate = DateTime.Now,
+                    NewsCategoryId = 2,
+                    AuthorId = context.Users.FirstOrDefault().Id
+                });
+
+
+                context.SaveChanges();
+            }
 
         }
     }

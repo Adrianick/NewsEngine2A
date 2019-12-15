@@ -52,6 +52,10 @@ namespace NewsEngine2A.Controllers
 
         public ActionResult Contact()
         {
+
+            var aa = _context.Users.FirstOrDefault();
+            
+
             //NewsEngineContext context = new NewsEngineContext();
 
             //if (!context.Roles.Any())

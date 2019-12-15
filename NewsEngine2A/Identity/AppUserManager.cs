@@ -8,7 +8,7 @@ using NewsEngine2A.Models.User;
 
 namespace NewsEngine2A.Identity
 {
-    public class AppUserManager : UserManager<User, int>
+    public class AppUserManager : UserManager<User, string>
     {
         public AppUserManager(IAppUserStore store) : base(store)
         { }
@@ -18,7 +18,7 @@ namespace NewsEngine2A.Identity
             AppUserManager manager = new AppUserManager(new AppUserStore(context.Get<NewsEngineContext>()));
 
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<User, int>(manager)
+            manager.UserValidator = new UserValidator<User, string>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true,
@@ -36,7 +36,7 @@ namespace NewsEngine2A.Identity
 
             IDataProtectionProvider dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
-                manager.UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("Security Token Provider"));
+                manager.UserTokenProvider = new DataProtectorTokenProvider<User, string>(dataProtectionProvider.Create("Security Token Provider"));
 
             return manager;
         }

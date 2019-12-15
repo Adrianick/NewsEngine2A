@@ -18,7 +18,7 @@ namespace NewsEngine2A
 
             //Database.SetInitializer<NewsEngineContext>(new DropCreateDatabaseAlways<NewsEngineContext>());
 
-            //System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<NewsEngine2A.Context.NewsEngineContext, NewsEngine2A.Context.Config.Configuration>());
+            System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<NewsEngine2A.Context.NewsEngineContext, NewsEngine2A.Context.Config.Configuration>());
 
         }
     }

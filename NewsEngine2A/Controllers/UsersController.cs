@@ -1,13 +1,10 @@
-﻿using NewsEngine2A.Identity;
-using NewsEngine2A.Models.User;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
+﻿using Microsoft.AspNet.Identity.Owin;
 using NewsEngine2A.Context;
-using System.Web;
-using System.Web.Mvc;
+using NewsEngine2A.Identity;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace NewsEngine2A.Controllers
 {
@@ -61,7 +58,7 @@ namespace NewsEngine2A.Controllers
             var users = await db.Users.ToListAsync();
             ViewBag.users = users;
 
-            
+
             return View("AdminIndex", masterName: "AdminLayout");
         }
     }

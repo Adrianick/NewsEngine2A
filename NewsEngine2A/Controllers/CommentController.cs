@@ -1,12 +1,10 @@
-﻿using NewsEngine2A.Context;
+﻿using Microsoft.AspNet.Identity;
+using NewsEngine2A.Context;
+using NewsEngine2A.Models.News;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using NewsEngine2A.Models.News;
 using System.Diagnostics;
+using System.Web.Mvc;
 
 namespace NewsEngine2A.Controllers
 {
@@ -32,7 +30,7 @@ namespace NewsEngine2A.Controllers
         [Route("admin/comment/new")]
         [Authorize(Roles = "Admin, Editor")]
         public ActionResult New()
-        { 
+        {
             List<SelectListItem> items = new List<SelectListItem>();
             var articles = db.Articles.Include("User");
 
@@ -79,9 +77,9 @@ namespace NewsEngine2A.Controllers
                     if (TryUpdateModel(newComment))
                     {
                         int id;
-                        newComment.AuthorId = Int32.TryParse(User.Identity.GetUserId(), out id) ? id : (int)-1;
+                        newComment.AuthorId = User.Identity.GetUserId();//Int32.TryParse(User.Identity.GetUserId(), out id) ? id : (int)-1;
 
-                        Debug.WriteLine("IDDD: " + id);
+                        //Debug.WriteLine("IDDD: " + id);
 
 
                         db.Comments.Add(newComment);
@@ -118,7 +116,8 @@ namespace NewsEngine2A.Controllers
             {
                 TempData["message"] = "Hey don't try to delete comments from articles that aren't yours!";
                 TempData["type"] = "warning";
-            } else
+            }
+            else
             {
                 TempData["message"] = "The comment was removed!";
                 TempData["type"] = "warning";
@@ -126,7 +125,7 @@ namespace NewsEngine2A.Controllers
                 db.Comments.Remove(comment);
                 db.SaveChanges();
             }
-            
+
             return RedirectToAction("Index");
         }
 
@@ -187,5 +186,5 @@ namespace NewsEngine2A.Controllers
         }
     }
 
-    
+
 }

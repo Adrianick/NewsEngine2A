@@ -3,12 +3,11 @@ using NewsEngine2A.Context;
 using NewsEngine2A.Models.News;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using System.Data.Entity;
 
 namespace NewsEngine2A.Controllers
 {
@@ -25,7 +24,8 @@ namespace NewsEngine2A.Controllers
             if (User.IsInRole("Admin"))
             {
                 return RedirectToAction("AllArticles");
-            } else
+            }
+            else
             {
                 int id = Int32.Parse(User.Identity.GetUserId());
                 return Redirect("/articles/" + id);
@@ -48,7 +48,8 @@ namespace NewsEngine2A.Controllers
         // permissions: [editor]
         [Route("admin/articles/{id}")]
         [Authorize(Roles = "Editor")]
-        public ActionResult MyArticles(int id)
+        //public ActionResult MyArticles(int id)
+        public ActionResult MyArticles(string id)
         {
             var articles = db.Articles.Where(a => a.AuthorId == id).Include("NewsCategory").Include("User");
             ViewBag.articles = articles;
@@ -109,7 +110,7 @@ namespace NewsEngine2A.Controllers
                     if (TryUpdateModel(newArticle))
                     {
                         int id;
-                        newArticle.AuthorId = Int32.TryParse(User.Identity.GetUserId(), out id) ? id : (int)-1;
+                        newArticle.AuthorId = User.Identity.GetUserId();//Int32.TryParse(User.Identity.GetUserId(), out id) ? id : (int)-1;
 
                         if (upload != null && upload.ContentLength > 0)
                         {

@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace NewsEngine2A.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -61,20 +61,13 @@ namespace NewsEngine2A.Controllers
             return View();
         }
 
-        [HttpPost]
         [AllowAnonymous]
-        public async Task SetRole(int userId = 1, string roleName = "User")
+        public async Task SetRole(string roleName = "User")
         {
-
-            //await _userManager.AddToRoleAsync(1, "Admin");\
-            var context = new NewsEngineContext();
-            var rol = new UserRole
-            {
-                UserId = 1,
-                RoleId = 4
-            };
-            context.UserRoles.Add(rol);
-            context.SaveChanges();
+            NewsEngineContext context = new NewsEngineContext();
+            var user = context.Users.FirstOrDefault();
+            await UserManager.RemoveFromRoleAsync(user.Id, "Registered");
+            await UserManager.AddToRoleAsync(user.Id, "Admin");
         }
 
         //
