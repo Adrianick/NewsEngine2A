@@ -182,6 +182,10 @@
     <Compile Include="Migrations\201912151807252_identityClassic.designer.cs">
       <DependentUpon>201912151807252_identityClassic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912161240090_isActiveArticle.cs" />
+    <Compile Include="Migrations\201912161240090_isActiveArticle.designer.cs">
+      <DependentUpon>201912161240090_isActiveArticle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\News\Article.cs" />
@@ -355,6 +359,8 @@
     <Content Include="Views\Comment\AdminNew.cshtml" />
     <Content Include="Views\Users\AdminIndex.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
+    <Content Include="Views\Articles\ProposeArticle.cshtml" />
+    <Content Include="Views\Articles\ProposedArticles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -377,6 +383,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201912151807252_identityClassic.resx">
       <DependentUpon>201912151807252_identityClassic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912161240090_isActiveArticle.resx">
+      <DependentUpon>201912161240090_isActiveArticle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

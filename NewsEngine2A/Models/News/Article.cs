@@ -30,6 +30,7 @@ namespace NewsEngine2A.Models.News
         public string PictureUrl { get; set; }
 
         public int NewsCategoryId { get; set; }
+        public int IsActive { get; set; }
 
         public string AuthorId { get; set; }
 

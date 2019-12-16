@@ -13,7 +13,11 @@ namespace NewsEngine2A.Controllers
         private readonly NewsEngineContext _context = new NewsEngineContext();
         public ActionResult Index(string search = null)
         {
-            var articles = _context.Articles.OrderByDescending(a => a.CreateDate).ToList();
+            List<Article> articles = new List<Article>();
+            if (_context.Articles.Any())
+            {
+                articles = _context.Articles.Where(a => a.IsActive == 1).OrderByDescending(a => a.CreateDate).ToList();
+            }
             var finalResult = new List<Article>();
             if (search != null)
             {
@@ -33,8 +37,8 @@ namespace NewsEngine2A.Controllers
             {
                 finalResult = articles;
             }
-
-            ViewBag.ArticlesWithMostComments = articles.Where(a => a.Comments.Count > 0).OrderByDescending(a => a.Comments.Count).Take(3).ToList();
+            if (articles != null)
+                ViewBag.ArticlesWithMostComments = articles.Where(a => a.Comments.Count > 0).OrderByDescending(a => a.Comments.Count).Take(3).ToList();
 
             return View(finalResult);
         }
@@ -54,7 +58,7 @@ namespace NewsEngine2A.Controllers
         {
 
             var aa = _context.Users.FirstOrDefault();
-            
+
 
             //NewsEngineContext context = new NewsEngineContext();
 

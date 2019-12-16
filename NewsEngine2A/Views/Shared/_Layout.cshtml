@@ -92,6 +92,10 @@
                                             @Html.Action("NavCategories", "NavPartial")
                                         </ul>
                                     </li>
+                                    @if (User.IsInRole("Registered"))
+                                    {
+                                    <li>@Html.ActionLink("Propose Article", "ProposeArticle", "Articles")</li>
+                                    }
                                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                 </ul>
                             </div>

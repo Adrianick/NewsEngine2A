@@ -1,0 +1,109 @@
+﻿@using NewsEngine2A.Models.News
+@model Article
+@{
+    ViewBag.Title = "Propose Article";
+
+     List<SelectListItem> listItems = new List<SelectListItem>();
+
+    foreach (var nc in @ViewBag.NewsCategories)
+        {
+            listItems.Add(new SelectListItem
+            {
+                Text = nc,
+                Value = nc
+            });
+        }
+    }
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>Vizew - Blog &amp; Magazine HTML Template</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+</head>
+
+<body >
+<!-- Preloader -->
+<div class="preloader d-flex align-items-center justify-content-center">
+    <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Propose Article</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Login Area Start ##### -->
+<div class="vizew-login-area section-padding-80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="login-content">
+                    <!-- Section Title -->
+                    <div class="section-heading">
+                        <h4>Great to have you back!</h4>
+                        <div class="line"></div>
+                    </div>
+                    @using (Html.BeginForm("ProposeArticle", "Articles", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+                    {
+                        @Html.AntiForgeryToken()
+                <form action="index.html" method="post">
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @placeholder = "Title" })
+                        @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Headline, new { @class = "form-control", @placeholder = "Headline" })
+                        @Html.ValidationMessageFor(m => m.Headline, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownListFor(m => m.NewsCategory, listItems, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NewsCategory, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(m => m.Content, new { @class = "form-control", @placeholder = "Content" })
+                        @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" class="btn vizew-btn w-100 mt-30">Propose Article</button>
+
+                </form>
+                    }
+                
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Login Area End ##### -->
+
+</body>
+
+</html>
+

@@ -16,6 +16,9 @@ namespace NewsEngine2A.Context.Config
             AutomaticMigrationDataLossAllowed = true;
         }
 
+
+
+
         public string HashPassword(string password)
         {
             byte[] salt;
@@ -65,6 +68,24 @@ namespace NewsEngine2A.Context.Config
                 context.Roles.Add(admin);
                 context.SaveChanges();
             }
+
+
+            //if (!context.Users.Any())
+            //{
+            //    User newUser = new User()
+            //    {
+            //        UserName = "admin@admin.com",
+            //        Email = "admin@admin.com",
+            //        Name = "admin",
+            //        Surname = "admin",
+            //        PhoneNumber = "0722222222"
+            //    };
+            //    var user = new User { UserName = newUser.Email, Email = newUser.Email, Name = newUser.Name, Surname = newUser.Surname, PhoneNumber = newUser.Phone };
+
+            //    var result = 
+
+
+            //}
 
             ///*
             // * Create a demo user admin 
@@ -171,66 +192,72 @@ namespace NewsEngine2A.Context.Config
 
             if (!context.Articles.Any())
             {
-                //context.Articles.Add(new Article()
-                //{
-                //    Title = "Titluuu1 ",
-                //    Headline = "Un articol smek",
-                //    Content = "2Acest articol vb despre cat de smek e ssa fii smekk",
-                //    CreateDate = DateTime.Now,
-                //    NewsCategoryId = 1,
-                //    AuthorId = context.Users.FirstOrDefault().Id
-                //});
-                //context.SaveChanges();
-                //context.Articles.Add(new Article()
-                //{
-                //    Title = "Titluuu2",
-                //    Headline = "Un articol tare 2",
-                //    Content = "Acest articol nu e",
-                //    CreateDate = DateTime.Now,
-                //    NewsCategoryId = 2,
-                //    AuthorId = context.Users.FirstOrDefault().Id
-                //});
-                //context.SaveChanges();
-                //context.Articles.Add(new Article()
-                //{
-                //    Title = "Titluu3",
-                //    Headline = "Un articol tare 3",
-                //    Content = "Doar nu e",
-                //    CreateDate = DateTime.Now,
-                //    NewsCategoryId = 2,
-                //    AuthorId = context.Users.FirstOrDefault().Id
-                //});
-                //context.SaveChanges();
-                //context.Articles.Add(new Article()
-                //{
-                //    Title = "Titluu4",
-                //    Headline = "Un articol tare 4",
-                //    Content = "Doar nu e asd",
-                //    CreateDate = DateTime.Now,
-                //    NewsCategoryId = 3,
-                //    AuthorId = context.Users.FirstOrDefault().Id
-                //});
-                //context.SaveChanges();
-                //context.Articles.Add(new Article()
-                //{
-                //    Title = "Titluu5",
-                //    Headline = "Un articol tare 5",
-                //    Content = "Doar nu e taree",
-                //    CreateDate = DateTime.Now,
-                //    NewsCategoryId = 2,
-                //    AuthorId = context.Users.FirstOrDefault().Id
-                //});
-                //context.SaveChanges();
-                //context.Articles.Add(new Article()
-                //{
-                //    Title = "Titluu6",
-                //    Headline = "Un articol tare 6",
-                //    Content = "Doar nu e tot",
-                //    CreateDate = DateTime.Now,
-                //    NewsCategoryId = 1,
-                //    AuthorId = context.Users.FirstOrDefault().Id
-                //});
-                //context.SaveChanges();
+                context.Articles.Add(new Article()
+                {
+                    Title = "Titluuu1 ",
+                    Headline = "Un articol smek",
+                    Content = "2Acest articol vb despre cat de smek e ssa fii smekk",
+                    CreateDate = DateTime.Now,
+                    NewsCategoryId = 1,
+                    AuthorId = context.Users.FirstOrDefault().Id,
+                    IsActive = 1
+                });
+                context.SaveChanges();
+                context.Articles.Add(new Article()
+                {
+                    Title = "Titluuu2",
+                    Headline = "Un articol tare 2",
+                    Content = "Acest articol nu e",
+                    CreateDate = DateTime.Now,
+                    NewsCategoryId = 2,
+                    AuthorId = context.Users.FirstOrDefault().Id,
+                    IsActive = 1
+                });
+                context.SaveChanges();
+                context.Articles.Add(new Article()
+                {
+                    Title = "Titluu3",
+                    Headline = "Un articol tare 3",
+                    Content = "Doar nu e",
+                    CreateDate = DateTime.Now,
+                    NewsCategoryId = 2,
+                    AuthorId = context.Users.FirstOrDefault().Id,
+                    IsActive = 1
+                });
+                context.SaveChanges();
+                context.Articles.Add(new Article()
+                {
+                    Title = "Titluu4",
+                    Headline = "Un articol tare 4",
+                    Content = "Doar nu e asd",
+                    CreateDate = DateTime.Now,
+                    NewsCategoryId = 3,
+                    AuthorId = context.Users.FirstOrDefault().Id,
+                    IsActive = 1
+                });
+                context.SaveChanges();
+                context.Articles.Add(new Article()
+                {
+                    Title = "Titluu5",
+                    Headline = "Un articol tare 5",
+                    Content = "Doar nu e taree",
+                    CreateDate = DateTime.Now,
+                    NewsCategoryId = 2,
+                    AuthorId = context.Users.FirstOrDefault().Id,
+                    IsActive = 1
+                });
+                context.SaveChanges();
+                context.Articles.Add(new Article()
+                {
+                    Title = "Titluu6",
+                    Headline = "Un articol tare 6",
+                    Content = "Doar nu e tot",
+                    CreateDate = DateTime.Now,
+                    NewsCategoryId = 1,
+                    AuthorId = context.Users.FirstOrDefault().Id,
+                    IsActive = 1
+                });
+                context.SaveChanges();
                 context.Articles.Add(new Article()
                 {
                     Title = "Titlwuu7",
@@ -238,7 +265,8 @@ namespace NewsEngine2A.Context.Config
                     Content = "Totsfgnhmghg asda d",
                     CreateDate = DateTime.Now,
                     NewsCategoryId = 1,
-                    AuthorId = context.Users.FirstOrDefault().Id
+                    AuthorId = context.Users.FirstOrDefault().Id,
+                    IsActive = 1
                 });
                 context.SaveChanges();
                 context.Articles.Add(new Article()
@@ -248,7 +276,8 @@ namespace NewsEngine2A.Context.Config
                     Content = "Doar nu e",
                     CreateDate = DateTime.Now,
                     NewsCategoryId = 1,
-                    AuthorId = context.Users.FirstOrDefault().Id
+                    AuthorId = context.Users.FirstOrDefault().Id,
+                    IsActive = 1
                 });
                 context.SaveChanges();
                 context.Articles.Add(new Article()
@@ -258,7 +287,8 @@ namespace NewsEngine2A.Context.Config
                     Content = "Doar nu are e",
                     CreateDate = DateTime.Now,
                     NewsCategoryId = 2,
-                    AuthorId = context.Users.FirstOrDefault().Id
+                    AuthorId = context.Users.FirstOrDefault().Id,
+                    IsActive = 1
                 });
 
 
